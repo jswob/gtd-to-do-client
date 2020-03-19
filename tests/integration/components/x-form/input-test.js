@@ -44,7 +44,7 @@ module("Integration | Component | x-form/input", function(hooks) {
   });
 
   test("it sets equal 'id' for input and 'for' for label", async function(assert) {
-    await render(hbs`<XForm::Input @inputID />`);
+    await render(hbs`<XForm::Input />`);
 
     // get id from input element
     let id = this.element.querySelector("[data-test-input='input']").id;
