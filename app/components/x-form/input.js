@@ -8,8 +8,17 @@ export default class XFormInputComponent extends Component {
     this.inputID = `input-${randomIdentifier}`;
   }
 
-  get isError() {
-    if (this.args.errorMessage) return true;
-    else return false;
+  get error() {
+    let { changeset, property } = this.args;
+    if (!changeset.errors.length) return null;
+
+    let error = changeset.errors.find(error => {
+      if (error.key === property) {
+        return true;
+      }
+    });
+
+    if (error) return error.validation[0];
+    return null;
   }
 }
