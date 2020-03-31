@@ -1,0 +1,31 @@
+<XForm @title="Zarejestruj się">
+  <XForm::Input @label="Email" @property="email" @changeset={{@changeset}} />
+  <XForm::Input
+    type="password"
+    @label="Password"
+    @property="password"
+    @changeset={{@changeset}}
+  />
+  <XForm::Input
+    type="password"
+    @label="Repeat password"
+    @property="repeatPassword"
+    @changeset={{@changeset}}
+  />
+  <XForm::Button
+    @text="Zarejestruj się"
+    @action={{fn this.createUser @changeset}}
+    disabled={{this.isDisabled}}
+  />
+  <XForm::Button
+    @text="Wyczyść zmiany"
+    @action={{fn this.rollback @changeset}}
+    {{!-- disabled="{{if @changeset.isInvalid "true" "false"}}" --}}
+  />
+
+  <XForm::Redirection
+    @infoText="Jeżeli już posiadasz konto"
+    @linkText="ZALOGUJ SIĘ"
+    @route="sign-in"
+  />
+</XForm>
