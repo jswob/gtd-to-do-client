@@ -1,29 +1,38 @@
 <XForm @title="Zarejestruj się">
-  <XForm::Input @label="Email" @property="email" @changeset={{@changeset}} />
   <XForm::Input
+    data-test-reg-form-input="email"
+    @label="Email"
+    @property="email"
+    @changeset={{@changeset}}
+  />
+  <XForm::Input
+    data-test-reg-form-input="password"
     type="password"
-    @label="Password"
+    @label="Hasło"
     @property="password"
     @changeset={{@changeset}}
   />
   <XForm::Input
+    data-test-reg-form-input="repeatPassword"
     type="password"
-    @label="Repeat password"
+    @label="Powtórz hasło"
     @property="repeatPassword"
     @changeset={{@changeset}}
   />
+
   <XForm::Button
+    data-test-reg-form-button="submit"
     @text="Zarejestruj się"
     @action={{fn this.createUser @changeset}}
-    disabled={{this.isDisabled}}
   />
   <XForm::Button
+    data-test-reg-form-button="clear"
     @text="Wyczyść zmiany"
     @action={{fn this.rollback @changeset}}
-    {{!-- disabled="{{if @changeset.isInvalid "true" "false"}}" --}}
   />
 
   <XForm::Redirection
+    data-test-reg-form-redirection
     @infoText="Jeżeli już posiadasz konto"
     @linkText="ZALOGUJ SIĘ"
     @route="sign-in"
