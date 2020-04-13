@@ -58,6 +58,9 @@
     "prember": "^1.0.3",
     "qunit-dom": "^1.0.0"
   },
+  "fastbootDependencies": [
+    "node-fetch"
+  ],
   "engines": {
     "node": "10.* || >= 12"
   },
