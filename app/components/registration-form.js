@@ -7,9 +7,17 @@ export default class RegistrationFormComponent extends Component {
 
   @action async createUser(changeset) {
     await changeset.validate();
-    if (changeset.isValid) {
-      await changeset.save();
-      return this.router.transtionTo("sign-in");
+    try {
+      if (changeset.isValid) {
+        await changeset.save();
+        return this.router.transtionTo("sign-in");
+      }
+    } catch ({ errors }) {
+      errors.forEach((error) => {
+        for (let [key, value] of Object.entries(error)) {
+          changeset.pushErrors(key, `${key} ${value}`);
+        }
+      });
     }
   }
 
