@@ -1,6 +1,6 @@
 import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
-import { render, click, fillIn } from "@ember/test-helpers";
+import { render, fillIn } from "@ember/test-helpers";
 import { hbs } from "ember-cli-htmlbars";
 import Changeset from "ember-changeset";
 import LoginValidations from "gtd-to-do-client/validations/login";
