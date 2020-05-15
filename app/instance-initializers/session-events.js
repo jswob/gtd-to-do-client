@@ -3,7 +3,7 @@ export function initialize(instance) {
   const session = instance.__container__.lookup("service:session");
 
   session.on("authenticationSucceeded", function () {
-    applicationRoute.transitionTo("sign-up");
+    applicationRoute.transitionTo("user");
   });
 
   session.on("invalidationSucceeded", function () {
