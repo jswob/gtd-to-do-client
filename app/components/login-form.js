@@ -16,6 +16,12 @@ export default class LoginFormComponent extends Component {
           password
         );
       }
-    } catch (reason) {}
+    } catch ({ errors }) {
+      errors.forEach((error) => {
+        for (let [key, value] of Object.entries(error)) {
+          changeset.pushErrors(key, `${key} ${value}`);
+        }
+      });
+    }
   }
 }
