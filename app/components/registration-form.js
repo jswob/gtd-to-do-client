@@ -10,7 +10,7 @@ export default class RegistrationFormComponent extends Component {
     try {
       if (changeset.isValid) {
         await changeset.save();
-        return this.router.transtionTo("sign-in");
+        return this.router.transitionTo("sign-in");
       }
     } catch ({ errors }) {
       errors.forEach((error) => {
