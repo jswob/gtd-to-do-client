@@ -21,15 +21,29 @@ module.exports = function (environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
+
+    fastboot: {
+      hostWhitelist: [/^localhost:\d+$/],
+    },
   };
 
   if (environment === "development") {
+    ENV.api = {
+      host: "http://localhost:4000",
+      namespace: "api",
+    };
+
     ENV["ember-cli-mirage"] = {
       enabled: false,
     };
   }
 
   if (environment === "test") {
+    ENV.api = {
+      host: "http://localhost:4200",
+      namespace: "api",
+    };
+
     ENV["ember-cli-mirage"] = {
       enabled: true,
     };
@@ -46,6 +60,11 @@ module.exports = function (environment) {
   }
 
   if (environment === "production") {
+    // ENV.api = {
+    //   host: "http://localhost:4000",
+    //   namespace: "api",
+    // };
+
     ENV["ember-cli-mirage"] = {
       enabled: true,
     };

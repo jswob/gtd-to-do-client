@@ -6,10 +6,10 @@ import Changeset from "ember-changeset";
 import RegistrationValidations from "gtd-to-do-client/validations/registration";
 import lookupValidator from "ember-changeset-validations";
 
-module("Integration | Component | registration-form", function(hooks) {
+module("Integration | Component | registration-form", function (hooks) {
   setupRenderingTest(hooks);
 
-  hooks.beforeEach(function() {
+  hooks.beforeEach(function () {
     const user = this.owner.lookup("service:store").createRecord("user", {});
 
     const changeset = new Changeset(
@@ -20,7 +20,7 @@ module("Integration | Component | registration-form", function(hooks) {
     this.set("changeset", changeset);
   });
 
-  test("it renders all data", async function(assert) {
+  test("it renders all data", async function (assert) {
     await render(
       hbs`
       <RegistrationForm 
@@ -37,7 +37,7 @@ module("Integration | Component | registration-form", function(hooks) {
     assert.dom(`[data-test-form="redirection"]`).exists();
   });
 
-  test("it can't save model if changeset has errors", async function(assert) {
+  test("it can't save model if changeset has errors", async function (assert) {
     await render(hbs`<RegistrationForm @changeset={{this.changeset}} />`);
     await fillIn(`[data-test-reg-form-input="email"]`, "Bad data");
 
@@ -48,7 +48,7 @@ module("Integration | Component | registration-form", function(hooks) {
     assert.ok(formText.includes("Email must be a valid email address"));
   });
 
-  test("after clicking on cancel button all changese are rollback", async function(assert) {
+  test("after clicking on cancel button all changese are rollback", async function (assert) {
     await render(hbs`<RegistrationForm @changeset={{this.changeset}} />`);
 
     await fillIn(`[data-test-reg-form-input="email"]`, "some@some.some");
