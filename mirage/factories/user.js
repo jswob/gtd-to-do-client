@@ -2,7 +2,7 @@ import { Factory } from "ember-cli-mirage";
 
 export default Factory.extend({
   email(i) {
-    return `User-${i}`;
+    return `user${i}@email.com`;
   },
 
   password(i) {

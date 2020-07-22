@@ -1,19 +1,21 @@
 import ENV from "gtd-to-do-client/config/environment";
+import { Response } from "miragejs";
 
 export default function () {
   this.urlPrefix = `${ENV.api.host}/${ENV.api.namespace}`;
 
   this.post("/users/sign_in", (schema, { requestBody }) => {
     let response;
+
     const userParams = getRequestParams(requestBody, ["username", "password"]);
 
-    const users = schema.users.all();
+    const users = schema.users.all();;
 
     users.models.forEach(({ email, password }) => {
       if (email == userParams.username && password == userParams.password)
         response = {
           access_token: `access_token_${email}_${password}`,
-          expires_in: 1,
+          expires_in: 0.0001,
           refresh_token: `refresh_token_${email}_${password}`,
           token_type: "bearer",
         };
@@ -21,13 +23,12 @@ export default function () {
 
     if (response) return response;
 
-    return {
-      errors: {
-        detail: "Could not find user",
-      },
-    };
+    return new Response(401, {}, { errors: { detail: "Could not find user" } })
+
+
   });
 }
+
 
 function getRequestParams(requestBody, keys) {
   const requestParams = {};
