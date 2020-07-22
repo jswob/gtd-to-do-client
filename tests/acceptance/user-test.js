@@ -20,7 +20,8 @@ module('Acceptance | user', function (hooks) {
 
     await click(`[data-test-reg-form-button="submit"]`)
 
-    assert.equal(currentURL(), "/user", "user session is correctly created")
+    assert.ok(currentSession().isAuthenticated, "session is authenticated")
+    assert.equal(currentURL(), "/user", "user is redirected after sign in")
   });
 
   test('it shows errors on failed sign_in attempt', async function (assert) {
@@ -36,4 +37,8 @@ module('Acceptance | user', function (hooks) {
 
     assert.dom("[data-test-input='error-span']").exists();
   });
+
+  test("it should redirect to user page after successful sign up", async function (assert) {
+
+  })
 });
