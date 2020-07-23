@@ -25,8 +25,32 @@ export default function () {
 
     return new Response(401, {}, { errors: { detail: "Could not find user" } })
 
-
   });
+
+  this.post("/users", (schema, { requestBody }) => {
+    const { user } = JSON.parse(requestBody);
+
+    const users = schema.users.all().models;
+    const isUnique = !users.filter(({ email }) => user.email == email).length
+
+    if (!isUnique) {
+      return new Response(422, {}, {
+        errors: [{
+          email: "has already been taken"
+        }]
+      })
+    }
+
+    const createdUser = schema.create("user", user);
+
+    return {
+      user: {
+        id: createdUser.id,
+        email: createdUser.email,
+        password_hash: "correct_access_token"
+      }
+    };
+  })
 }
 
 
