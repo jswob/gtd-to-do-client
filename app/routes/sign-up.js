@@ -5,10 +5,14 @@ import { inject as service } from "@ember/service";
 export default class SignUpRoute extends Route {
   @service session;
 
-  model() {
+  beforeModel() {
     if (this.session.isAuthenticated) {
-      return this.transitionTo("user");
+      const user_id = this.session.data.authenticated.user_id;
+      return this.transitionTo("user", user_id);
     }
+  }
+
+  model() {
     return this.store.createRecord("user", {});
   }
 
