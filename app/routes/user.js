@@ -10,5 +10,8 @@ export default class UserRoute extends Route {
     }
   }
 
-  model(params) {}
+  async model({ user_id }) {
+    const user = await this.store.findRecord("user", user_id);
+    return user;
+  }
 }
