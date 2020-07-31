@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { visit, fillIn, click, currentURL } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
-import { currentSession, authenticateSession, invalidateSession } from 'ember-simple-auth/test-support';
+import { currentSession, invalidateSession } from 'ember-simple-auth/test-support';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 
 // This is testing file for testing user network interactions via ember-cli-mirage
