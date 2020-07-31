@@ -12,7 +12,7 @@ module("Acceptance | transition protection", function (hooks) {
   setupMirage(hooks);
 
   const userData = {
-    id: 134218489321341234812401203089210421,
+    id: 1342184893,
     email: "some@some.some",
     password: "some123",
   };

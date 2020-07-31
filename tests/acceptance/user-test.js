@@ -13,7 +13,7 @@ module("Acceptance | user", function (hooks) {
   setupMirage(hooks);
 
   const userData = {
-    id: 192193129319231239129391239129,
+    id: 192193129,
     email: "some@some.some",
     password: "some123",
   };

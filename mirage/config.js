@@ -5,24 +5,18 @@ export default function () {
   this.urlPrefix = `${ENV.api.host}/${ENV.api.namespace}`;
 
   this.post("/users/sign_in", (schema, { requestBody }) => {
-    let response;
-
     const userParams = getRequestParams(requestBody, ["username", "password"]);
 
-    const users = schema.users.all();
+    const user = schema.users.findBy({ email: userParams.username });
 
-    users.models.forEach(({ email, password, id }) => {
-      if (email == userParams.username && password == userParams.password)
-        response = {
-          access_token: `access_token_${email}_${password}`,
-          expires_in: 0.0001,
-          refresh_token: `refresh_token_${email}_${password}`,
-          token_type: "bearer",
-          user_id: id,
-        };
-    });
-
-    if (response) return response;
+    if (user)
+      return {
+        access_token: `access_token_${user.email}_${user.password}`,
+        expires_in: 0.0001,
+        refresh_token: `refresh_token_${user.email}_${user.password}`,
+        token_type: "bearer",
+        user_id: user.id,
+      };
 
     return new Response(401, {}, { errors: { detail: "Could not find user" } });
   });
@@ -57,6 +51,24 @@ export default function () {
       },
     };
   });
+
+  this.get("/users/:user_id", (schema, request) => {
+    if (!checkToken(request))
+      return new Response(401, {}, { errors: { detail: "Bad token" } });
+
+    const user = schema.users.find(request.params.user_id);
+
+    if (!user)
+      return new Response(
+        401,
+        {},
+        { errors: { detail: "Could not find user with this id" } }
+      );
+
+    return {
+      users: user,
+    };
+  });
 }
 
 function getRequestParams(requestBody, keys) {
@@ -72,4 +84,12 @@ function getRequestParams(requestBody, keys) {
   });
 
   return requestParams;
+}
+
+function checkToken(request) {
+  const token = request.requestHeaders.authorization.split(" ")[1];
+
+  if (!token || !token.includes("access_token_")) return false;
+
+  return token;
 }
