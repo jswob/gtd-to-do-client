@@ -9,36 +9,42 @@ export default function () {
 
     const userParams = getRequestParams(requestBody, ["username", "password"]);
 
-    const users = schema.users.all();;
+    const users = schema.users.all();
 
-    users.models.forEach(({ email, password }) => {
+    users.models.forEach(({ email, password, id }) => {
       if (email == userParams.username && password == userParams.password)
         response = {
           access_token: `access_token_${email}_${password}`,
           expires_in: 0.0001,
           refresh_token: `refresh_token_${email}_${password}`,
           token_type: "bearer",
+          user_id: id,
         };
     });
 
     if (response) return response;
 
-    return new Response(401, {}, { errors: { detail: "Could not find user" } })
-
+    return new Response(401, {}, { errors: { detail: "Could not find user" } });
   });
 
   this.post("/users", (schema, { requestBody }) => {
     const { user } = JSON.parse(requestBody);
 
     const users = schema.users.all().models;
-    const isUnique = !users.filter(({ email }) => user.email == email).length
+    const isUnique = !users.filter(({ email }) => user.email == email).length;
 
     if (!isUnique) {
-      return new Response(422, {}, {
-        errors: [{
-          email: "has already been taken"
-        }]
-      })
+      return new Response(
+        422,
+        {},
+        {
+          errors: [
+            {
+              email: "has already been taken",
+            },
+          ],
+        }
+      );
     }
 
     const createdUser = schema.create("user", user);
@@ -47,12 +53,11 @@ export default function () {
       user: {
         id: createdUser.id,
         email: createdUser.email,
-        password_hash: "correct_access_token"
-      }
+        password_hash: "correct_access_token",
+      },
     };
-  })
+  });
 }
-
 
 function getRequestParams(requestBody, keys) {
   const requestParams = {};
