@@ -32,7 +32,7 @@ module("Acceptance | transition protection", function (hooks) {
 
   test("it cant visit sign-in route if session is authenticated", async function (assert) {
     await visit("/sign-in");
-    assert.equal(currentURL(), `/user/${userData.id}`);
+    assert.equal(currentURL(), `/user/${userData.id}/collections`);
   });
 
   test("it can visit sign-in route if session is unauthenticated", async function (assert) {
@@ -44,7 +44,7 @@ module("Acceptance | transition protection", function (hooks) {
 
   test("it cant visit sign-up route if session is authenticated", async function (assert) {
     await visit("/sign-up");
-    assert.equal(currentURL(), `/user/${userData.id}`);
+    assert.equal(currentURL(), `/user/${userData.id}/collections`);
   });
 
   test("it can visit sign-up route if session is unauthenticated", async function (assert) {
@@ -55,8 +55,7 @@ module("Acceptance | transition protection", function (hooks) {
   });
 
   test("it can visit user route if session is authenticated", async function (assert) {
-    await visit(`/user/${userData.id}`);
-    assert.equal(currentURL(), `/user/${userData.id}`);
+    assert.equal(currentURL(), `/user/${userData.id}/collections`);
   });
 
   test("it cant visit user route if session is authenticated", async function (assert) {
@@ -64,5 +63,10 @@ module("Acceptance | transition protection", function (hooks) {
 
     await visit(`/user/${userData.id}`);
     assert.equal(currentURL(), "/sign-in");
+  });
+
+  test("it cant visit user route if user_id from token is diffrent from this from link", async function (assert) {
+    await visit(`/user/987654321`);
+    assert.equal(currentURL(), `/user/${userData.id}/collections`);
   });
 });

@@ -33,7 +33,7 @@ module("Acceptance | user", function (hooks) {
     assert.ok(currentSession().isAuthenticated, "session is authenticated");
     assert.equal(
       currentURL(),
-      `/user/${userData.id}`,
+      `/user/${userData.id}/collections`,
       "user is redirected after sign in"
     );
   });
