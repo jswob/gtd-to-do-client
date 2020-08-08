@@ -11,9 +11,9 @@ export default function () {
 
     if (user)
       return {
-        access_token: `access_token_${user.email}_${user.password}`,
+        access_token: `access_token_${user.id}`,
         expires_in: 0.0001,
-        refresh_token: `refresh_token_${user.email}_${user.password}`,
+        refresh_token: `refresh_token_${user.id}`,
         token_type: "bearer",
         user_id: user.id,
       };
@@ -69,6 +69,88 @@ export default function () {
       users: user,
     };
   });
+
+  this.get("/buckets", (schema, request) => {
+    const userId = checkToken(request);
+
+    if (!userId)
+      return new Response(401, {}, { errors: { detail: "Bad token" } });
+
+    const buckets = schema.buckets.all().models.filter(({ attrs }) => {
+      if (attrs.ownerId == userId) return true;
+      return false;
+    });
+
+    const response = buckets.map(({ attrs }) => {
+      return {
+        id: attrs.id,
+        title: attrs.title,
+        color: attrs.color,
+        links: {
+          collections: `/api/buckets/${attrs.id}/collections`,
+        },
+      };
+    });
+
+    return {
+      buckets: response,
+    };
+  });
+
+  this.get("/collections", (schema, request) => {
+    const userId = checkToken(request);
+
+    if (!userId)
+      return new Response(401, {}, { errors: { detail: "Bad token" } });
+
+    const collections = schema.collections.all().models.filter(({ attrs }) => {
+      if (attrs.ownerId == userId && !attrs.bucketId) return true;
+      return false;
+    });
+
+    const response = collections.map(({ attrs }) => {
+      return {
+        id: attrs.id,
+        title: attrs.title,
+        color: attrs.color,
+        links: {
+          collections: `/api/collections/${attrs.id}/lists`,
+        },
+      };
+    });
+
+    return {
+      collections: response,
+    };
+  });
+
+  this.get("/buckets/:bucket_id/collections", (schema, request) => {
+    const userId = checkToken(request);
+
+    if (!userId)
+      return new Response(401, {}, { errors: { detail: "Bad token" } });
+
+    const collections = schema.collections.all().models.filter(({ attrs }) => {
+      if (attrs.ownerId == userId && attrs.bucketId == request.params.bucket_id)
+        return true;
+      return false;
+    });
+
+    const response = collections.map(({ attrs }) => {
+      return {
+        id: attrs.id,
+        title: attrs.title,
+        color: attrs.color,
+        links: {
+          collections: `/api/collections/${attrs.id}/lists`,
+        },
+      };
+    });
+
+    return {
+      collections: response,
+    };
+  });
 }
 
 function getRequestParams(requestBody, keys) {
@@ -91,5 +173,5 @@ function checkToken(request) {
 
   if (!token || !token.includes("access_token_")) return false;
 
-  return token;
+  return token.split("_token_")[1];
 }
