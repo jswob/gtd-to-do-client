@@ -5,4 +5,5 @@ export default class TaskModel extends Model {
   @attr("boolean") isDone;
 
   @belongsTo("list") list;
+  @belongsTo("user") owner;
 }

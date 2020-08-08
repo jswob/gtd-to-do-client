@@ -5,5 +5,6 @@ export default class CollectionModel extends Model {
   @attr("string") color;
 
   @belongsTo("bucket") bucket;
+  @belongsTo("user") owner;
   @hasMany("list") lists;
 }
