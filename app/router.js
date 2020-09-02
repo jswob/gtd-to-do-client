@@ -14,8 +14,12 @@ Router.map(function () {
       this.route(
         "collection",
         { path: "collection/:collection_id" },
-        function () {}
+        function () {
+          this.route('edit');
+          this.route('delete');
+        }
       );
+      this.route('new');
     });
     this.route("profile");
     this.route("delete");
