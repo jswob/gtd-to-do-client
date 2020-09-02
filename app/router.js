@@ -17,7 +17,16 @@ Router.map(function () {
         function () {}
       );
     });
-    this.route('profile');
-    this.route('delete');
+    this.route("profile");
+    this.route("delete");
+
+    this.route("buckets", function () {
+      this.route("new");
+    });
+
+    this.route("bucket", { path: "bucket/:bucket_id" }, function () {
+      this.route("edit");
+      this.route("delete");
+    });
   });
 });
