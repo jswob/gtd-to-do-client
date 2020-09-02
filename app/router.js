@@ -17,5 +17,7 @@ Router.map(function () {
         function () {}
       );
     });
+    this.route('profile');
+    this.route('delete');
   });
 });
