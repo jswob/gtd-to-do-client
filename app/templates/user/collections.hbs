@@ -1,26 +1,26 @@
-<h1>Collections</h1>
-
-<ul>
-    {{#each this.model.buckets as |bucket|}}
+<ol>
+    {{#each @model.buckets as |bucket|}}
     <li>
-        <h3>Bucket: {{bucket.title}}</h3>
-        <ul>
-            {{#each bucket.collections as |collection|}}
+        <h3>{{bucket.title}}</h3>
+        <ol>
+            {{#each bucket.collections as |bucketCollection|}}
             <li>
-                <span>Collection: {{collection.title}}</span>
+                <LinkTo @route="user.collections.collection" @model={{bucketCollection}}>
+                    {{bucketCollection.title}}</LinkTo>
             </li>
             {{/each}}
-        </ul>
+        </ol>
     </li>
     {{/each}}
-</ul>
+</ol>
 
-<ul>
-    {{#each this.model.collections as |collection|}}
+<ol>
+    {{#each @model.collections as |collection|}}
     <li>
-        <span>Collection: {{collection.title}}</span>
+        <LinkTo @route="user.collections.collection" @model={{collection}}>
+            {{collection.title}}</LinkTo>
     </li>
     {{/each}}
-</ul>
+</ol>
 
 {{outlet}}
