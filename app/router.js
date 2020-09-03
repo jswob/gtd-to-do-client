@@ -15,11 +15,20 @@ Router.map(function () {
         "collection",
         { path: "collection/:collection_id" },
         function () {
-          this.route('edit');
-          this.route('delete');
+          this.route("edit");
+          this.route("delete");
+
+          this.route("lists", function () {
+            this.route("new");
+          });
+
+          this.route("list", { path: "list/:list_id" }, function () {
+            this.route("edit");
+            this.route("delete");
+          });
         }
       );
-      this.route('new');
+      this.route("new");
     });
     this.route("profile");
     this.route("delete");
