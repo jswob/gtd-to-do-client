@@ -1,19 +1,11 @@
-<div data-test-input="div" class="">
-  <label data-test-input="label" class="" for={{this.inputID}}>
-    {{@label}}
-  </label>
-  <Input
-    ...attributes
-    data-test-input="input"
-    id={{this.inputID}}
-    class=""
-    @value={{get @changeset @property}}
-  />
+<div data-test-input="div" class="text-center">
+  <Input ...attributes data-test-input="input" id={{this.inputID}} class={{this.classes}} placeholder={{@label}}
+    @value={{get @changeset @property}} />
 
   {{#if this.error}}
-    <span data-test-input="error-span" class="">
-      <br />
-      {{this.error}}
-    </span>
+  <span data-test-input="error-span" class="text-red-600">
+    <br />
+    {{this.error}}
+  </span>
   {{/if}}
 </div>
