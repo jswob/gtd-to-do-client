@@ -1,6 +1,6 @@
 <div data-test-input="div" class="text-center">
-  <Input ...attributes data-test-input="input" id={{this.inputID}} class={{this.classes}} placeholder={{@label}}
-    @value={{get @changeset @property}} />
+  <Input ...attributes class="inp" data-test-input="input" id={{this.inputID}} class={{this.classes}}
+    placeholder={{@label}} @value={{get @changeset @property}} />
 
   {{#if this.error}}
   <span data-test-input="error-span" class="text-red-600">
