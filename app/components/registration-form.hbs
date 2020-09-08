@@ -1,40 +1,16 @@
-<XForm @title="Zarejestruj się">
-  <XForm::Input
-    data-test-reg-form-input="email"
-    @label="Email"
-    @property="email"
-    @changeset={{@changeset}}
-  />
-  <XForm::Input
-    data-test-reg-form-input="password"
-    type="password"
-    @label="Hasło"
-    @property="password"
-    @changeset={{@changeset}}
-  />
-  <XForm::Input
-    data-test-reg-form-input="repeatPassword"
-    type="password"
-    @label="Powtórz hasło"
-    @property="repeatPassword"
-    @changeset={{@changeset}}
-  />
+<XForm @title="Zarejestruj się"
+  class="grid grid-cols-1 place-content-center w-10/12 sm:w-1/2 md:1/4 pt-16 mx-auto max-w-screen-sm">
+  <XForm::Input data-test-reg-form-input="email" @label="Email" @property="email" @changeset={{@changeset}} />
+  <XForm::Input data-test-reg-form-input="password" type="password" @label="Hasło" @property="password"
+    @changeset={{@changeset}} />
+  <XForm::Input data-test-reg-form-input="repeatPassword" type="password" @label="Powtórz hasło"
+    @property="repeatPassword" @changeset={{@changeset}} />
 
-  <XForm::Button
-    data-test-reg-form-button="submit"
-    @text="Zarejestruj się"
-    @action={{fn this.createUser @changeset}}
-  />
-  <XForm::Button
-    data-test-reg-form-button="clear"
-    @text="Wyczyść zmiany"
-    @action={{fn this.rollback @changeset}}
-  />
+  <XForm::Button data-test-reg-form-button="clear" class="btn-utility" @text="Wyczyść zmiany"
+    @action={{fn this.rollback @changeset}} />
+  <XForm::Button data-test-reg-form-button="submit" class="mt-2 btn-main" @text="Zarejestruj się"
+    @action={{fn this.createUser @changeset}} />
 
-  <XForm::Redirection
-    data-test-reg-form-redirection
-    @infoText="Jeżeli już posiadasz konto"
-    @linkText="ZALOGUJ SIĘ"
-    @route="sign-in"
-  />
+  <XForm::Redirection data-test-reg-form-redirection @infoText="Jeżeli już posiadasz konto" @linkText="ZALOGUJ SIĘ"
+    @route="sign-in" />
 </XForm>
