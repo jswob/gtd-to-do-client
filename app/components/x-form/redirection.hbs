@@ -1,8 +1,7 @@
 <p data-test-form="redirection" class="text-center mt-4 text-lg">
   {{@infoText}}
   <br>
-  <LinkTo data-test-form="redirection-link" class="text-gray-700 text-xl inline-block border-b-2 border-gray-700"
-    @route={{@route}}>
+  <LinkTo ...attributes data-test-form="redirection-link" class="text-xl inline-block border-b-2" @route={{@route}}>
     {{@linkText}}
   </LinkTo>
 </p>

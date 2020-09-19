@@ -1,5 +1,4 @@
-<XForm @title="Zaloguj się"
-  class="grid grid-cols-1 place-content-center w-10/12 sm:w-1/2 md:1/4 pt-16 mx-auto max-w-screen-sm">
+<XForm @title="Zaloguj się" class="form-main text-main sm:w-1/2 md:1/4">
   <XForm::Input data-test-reg-form-input="email" @label="Email" @property="email" @changeset={{@changeset}} />
   <XForm::Input data-test-reg-form-input="password" type="password" @label="Hasło" @property="password"
     @changeset={{@changeset}} />
@@ -7,6 +6,6 @@
   <XForm::Button data-test-reg-form-button="submit" class="btn-main" @text="Zaloguj"
     @action={{fn this.login @changeset}} />
 
-  <XForm::Redirection data-test-reg-form-redirection @infoText="Jeżeli nie posiadasz konta" @linkText="ZAREJESTRUJ SIĘ"
-    @route="sign-up" />
+  <XForm::Redirection class="text-light" data-test-reg-form-redirection @infoText="Jeżeli nie posiadasz konta"
+    @linkText="ZAREJESTRUJ SIĘ" @route="sign-up" />
 </XForm>
