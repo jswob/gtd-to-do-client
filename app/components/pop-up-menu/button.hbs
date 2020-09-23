@@ -1,0 +1,9 @@
+{{#if @route}}
+<LinkTo ...attributes class="block bg-green-800 text-light text-lg w-5/6 py-1 mb-2 mx-auto cursor-pointer"
+    @route={{@route}}>
+    {{yield}}
+</LinkTo>
+{{else}}
+<button ...attributes class="block bg-green-800 text-light text-lg w-5/6 py-1 mb-2 mx-auto cursor-pointer" type="button"
+    {{on "click" @action}}>{{yield}}</button>
+{{/if}}
