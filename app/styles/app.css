@@ -24,7 +24,7 @@ body {
 }
 
 .simple-input {
-  @apply border-b-2 px-3 outline-none text-xl mt-4 bg-gray-800;
+  @apply border-b-2 px-3 outline-none text-xl mt-4 bg-gray-900;
 }
 
 .btn {
@@ -40,5 +40,5 @@ body {
 }
 
 .form-main {
-  @apply grid grid-cols-1 place-content-center w-10/12 mt-16 py-6 rounded-lg mx-auto max-w-screen-sm bg-gray-800;
+  @apply grid grid-cols-1 place-content-center w-10/12 mt-16 py-6 rounded-lg mx-auto max-w-screen-sm bg-gray-900;
 }
