@@ -6,13 +6,13 @@ import { validateLength } from "ember-changeset-validations/validators";
 import lookupValidator from "ember-changeset-validations";
 import { hbs } from "ember-cli-htmlbars";
 
-module("Integration | Component | x-form/input", function(hooks) {
+module("Integration | Component | x-form/input", function (hooks) {
   setupRenderingTest(hooks);
 
-  hooks.beforeEach(function() {
+  hooks.beforeEach(function () {
     // Create custom validation
     const TestingValidations = {
-      email: validateLength({ min: 6 })
+      email: validateLength({ min: 6 }),
     };
 
     const user = this.owner.lookup("service:store").createRecord("user", {});
@@ -24,20 +24,19 @@ module("Integration | Component | x-form/input", function(hooks) {
     this.set("property", "email");
   });
 
-  test("it renders all elements", async function(assert) {
+  test("it renders all elements", async function (assert) {
     await render(
       hbs`<XForm::Input @label={{this.property}} @changeset={{this.changeset}} @property={{this.property}} />`
     );
 
     assert.dom("[data-test-input='div']").exists();
     assert
-      .dom("[data-test-input='label']")
+      .dom("[data-test-input='input']")
       .exists()
-      .hasText(this.property);
-    assert.dom("[data-test-input='input']").exists();
+      .hasProperty("placeholder", this.property);
   });
 
-  test("it shows error-span only if error message is sent", async function(assert) {
+  test("it shows error-span only if error message is sent", async function (assert) {
     await render(
       hbs`<XForm::Input @label={{this.property}} @changeset={{this.changeset}} @property={{this.property}} />`
     );
@@ -52,7 +51,7 @@ module("Integration | Component | x-form/input", function(hooks) {
       .hasText("Email is too short (minimum is 6 characters)");
   });
 
-  test("it updates value", async function(assert) {
+  test("it updates value", async function (assert) {
     await render(
       hbs`<XForm::Input @label="Email" @changeset={{this.changeset}} @property={{this.property}} />`
     );
@@ -65,7 +64,7 @@ module("Integration | Component | x-form/input", function(hooks) {
     assert.equal("some-test-value", this.changeset.email);
   });
 
-  test("it sets equal 'id' for input and 'for' for label", async function(assert) {
+  test("it sets equal 'id' for input and 'for' for label", async function (assert) {
     await render(
       hbs`<XForm::Input @label="Email" @changeset={{this.changeset}} @property={{this.property}} />`
     );
@@ -75,6 +74,5 @@ module("Integration | Component | x-form/input", function(hooks) {
 
     assert.ok(id);
     assert.dom("[data-test-input='input']").hasAttribute("id", id);
-    assert.dom("[data-test-input='label']").hasAttribute("for", id);
   });
 });
