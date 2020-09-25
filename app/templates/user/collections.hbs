@@ -1,3 +1,12 @@
+<TopMenu @label="Kolekcje">
+    <PopUpMenu @label="Grupy i Kolekcje">
+        <PopUpMenu::Button @route="user">Utwórz grupę</PopUpMenu::Button>
+        <PopUpMenu::Button @route="user">Utwórz kolekcję</PopUpMenu::Button>
+    </PopUpMenu>
+</TopMenu>
+
+<SessionDropButton />
+
 <ol>
     {{#each @model.buckets as |bucket|}}
     <li>
