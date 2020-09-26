@@ -3,6 +3,7 @@ import { inject as service } from "@ember/service";
 
 export default class UserRoute extends Route {
   @service session;
+  @service currentData;
 
   beforeModel() {
     if (!this.session.isAuthenticated) {
@@ -18,6 +19,7 @@ export default class UserRoute extends Route {
 
     try {
       const fetchedUser = await this.store.findRecord("user", user_id);
+      this.currentData.user = fetchedUser;
       this.transitionTo("user.collections", fetchedUser);
     } catch (error) {
       throw error;
