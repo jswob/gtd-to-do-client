@@ -1,0 +1,12 @@
+<div class="w-5/6 mx-auto mb-3 rounded-lg bg-green-800 text-center pb-2">
+    <div class="relative w-full text-gray-300">
+        <h3 class="w-full text-xl text-center py-2">{{@bucket.title}}</h3>
+        <PopUpMenu @label={{@bucket.title}} class="absolute top-0 right-0 h-full p-2 z-40">
+            <PopUpMenu::Button @route="user.bucket.edit" @model={{@bucket}}>Edytuj</PopUpMenu::Button>
+            <PopUpMenu::Button @route="user.bucket.delete" @model={{@bucket}}>Usuń</PopUpMenu::Button>
+        </PopUpMenu>
+    </div>
+    {{#each @bucket.collections as |collection|}}
+    <CollectionContainer @collection={{collection}} />
+    {{/each}}
+</div>
