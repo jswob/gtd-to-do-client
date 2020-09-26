@@ -9,9 +9,4 @@ export default class PopUpMenuComponent extends Component {
   toggleMenu() {
     this.isOpened = !this.isOpened;
   }
-
-  @action
-  nothing() {
-    //It's literary nothing in here!
-  }
 }
