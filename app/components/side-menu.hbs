@@ -1,11 +1,12 @@
-<button type="button" class="material-icons text-center h-full" {{on "click" this.toggleOpen}}>
+<button data-test-side-menu="icon" type="button" class="material-icons text-center h-full"
+    {{on "click" this.toggleOpen}}>
     menu
 </button>
 
-<div data-test-pop-up-menu="background" class="bg-active {{if this.isOpen "bg-active-open"}}"
+<div data-test-side-menu="background" class="bg-active {{if this.isOpen "bg-active-open"}}"
     {{on "click" this.toggleOpen}}>
 </div>
 
-<aside
+<aside data-test-side-menu="aside"
     class="transform top-0 left-0 w-64 bg-white fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30 {{if this.isOpen "translate-x-0" "-translate-x-full"}}">
 </aside>
