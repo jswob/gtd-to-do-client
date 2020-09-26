@@ -1,0 +1,23 @@
+<div class="flex border-b-2 border-green-700">
+
+    <LinkTo @route="user.profile" class="w-1/5 p-2">
+        <img src="https://i.pinimg.com/474x/54/6f/5d/546f5d52913f2a896011f6c528976ae8.jpg"
+            class="rounded-full w-full h-full" alt="Profile avatar">
+    </LinkTo>
+
+    {{!-- <button type="button" class="w-1/5 p-2" {{on "click" this.transtionToProfile}}>
+    </button> --}}
+
+
+    <div class="my-auto ml-2 w-3/5 text-md">
+        <LinkTo @route="user.profile">
+            {{this.currentData.user.email}}
+        </LinkTo>
+    </div>
+    <div class="flex content-center w-1/5 text-center my-auto pr-2">
+        <button class="material-icons text-center mx-auto" data-test-pop-up-menu="icon" type="button"
+            {{on "click" this.currentData.logout}}>
+            exit_to_app
+        </button>
+    </div>
+</div>
