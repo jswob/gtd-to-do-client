@@ -1,0 +1,10 @@
+<TopMenu @label="Lista Kolekcji" @model={{this.model}}>
+    <PopUpMenu @label="Grupy i Kolekcje">
+        <PopUpMenu::Button @route="user">Utwórz grupę</PopUpMenu::Button>
+        <PopUpMenu::Button @route="user">Utwórz kolekcję</PopUpMenu::Button>
+    </PopUpMenu>
+</TopMenu>
+
+<article class="w-full mx-auto pt-4">
+    <ContainersBox @model={{this.model}} />
+</article>
