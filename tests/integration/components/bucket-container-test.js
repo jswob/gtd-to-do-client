@@ -19,8 +19,6 @@ module("Integration | Component | bucket-container", function (hooks) {
     this.set("model", model);
     await render(hbs`<BucketContainer @bucket={{this.model}} />`);
 
-    await this.pauseTest();
-
     assert
       .dom("[data-test-bucket-container='collection']")
       .exists({ count: model.collections.length });
