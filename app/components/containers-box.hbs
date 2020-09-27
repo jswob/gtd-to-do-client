@@ -1,9 +1,9 @@
 <div class="w-full overflow-scroll pt-4">
     {{#each @model.buckets as |bucket|}}
-    <BucketContainer @bucket={{bucket}} />
+    <BucketContainer data-test-containers-box="bucket" @bucket={{bucket}} />
     {{/each}}
 
     {{#each @model.collections as |collection|}}
-    <CollectionContainer @collection={{collection}} />
+    <CollectionContainer data-test-containers-box="collection" @collection={{collection}} />
     {{/each}}
 </div>
