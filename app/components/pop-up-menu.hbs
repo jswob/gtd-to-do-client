@@ -1,5 +1,5 @@
 <button ...attributes class="material-icons text-center h-full" data-test-pop-up-menu="icon" type="button"
-    {{on "click" this.toggleMenu}}>
+    {{on "click" (stop-propagation this.toggleMenu)}}>
     more_vert
 </button>
 
