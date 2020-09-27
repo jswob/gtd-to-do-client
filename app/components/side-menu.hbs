@@ -10,4 +10,10 @@
 <aside data-test-side-menu="aside"
     class="transform top-0 left-0 w-80 bg-gray-900 fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30 {{if this.isOpen "translate-x-0" "-translate-x-full"}}">
     <SideMenu::UserMenuPart />
+    <ContainersBox @model={{@model}} />
+    <div class="absolute flex bottom-0 left-0 w-full p-2 bg-green-600 text-gray-900 text-center text-md">
+        <LinkTo @route="user.buckets.new" class="w-1/2 px-2 my-auto">Utwórz grupę</LinkTo>
+        <LinkTo @route="user.collections.new" class="w-1/2 border-l border-gray-900 px-1 my-auto">Utwórz kolekcję
+        </LinkTo>
+    </div>
 </aside>
