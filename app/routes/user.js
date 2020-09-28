@@ -20,7 +20,7 @@ export default class UserRoute extends Route {
     try {
       const fetchedUser = await this.store.findRecord("user", user_id);
       this.currentData.user = fetchedUser;
-      this.transitionTo("user.collections", fetchedUser);
+      return fetchedUser;
     } catch (error) {
       throw error;
     }
