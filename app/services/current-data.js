@@ -2,12 +2,18 @@ import Service from "@ember/service";
 import { inject as service } from "@ember/service";
 import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
+import { computed } from "@ember/object";
 
 export default class CurrentDataService extends Service {
   @service session;
   @service store;
 
   @tracked user = null;
+
+  @computed("localStorage.previousRouteName")
+  get previousRouteName() {
+    return localStorage.previousRouteName;
+  }
 
   @action
   async logout() {
