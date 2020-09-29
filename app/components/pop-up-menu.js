@@ -3,10 +3,11 @@ import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
 
 export default class PopUpMenuComponent extends Component {
-  @tracked isOpened = false;
+  @tracked isOpen = false;
 
   @action
-  toggleMenu() {
-    this.isOpened = !this.isOpened;
+  toggleOpen() {
+    this.isOpen = !this.isOpen;
+    console.log(this.isOpen);
   }
 }
