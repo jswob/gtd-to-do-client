@@ -8,6 +8,5 @@ export default class PopUpMenuComponent extends Component {
   @action
   toggleOpen() {
     this.isOpen = !this.isOpen;
-    console.log(this.isOpen);
   }
 }
