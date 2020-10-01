@@ -17,6 +17,12 @@ export default class CurrentDataService extends Service {
     return localStorage.previousRouteName;
   }
 
+  @computed("localStorage.previousRouteModel")
+  get previousRouteModel() {
+    if (localStorage.previousRouteModel) return localStorage.previousRouteName;
+    return null;
+  }
+
   @action
   async logout() {
     const models = ["user", "bucket", "collection", "list", "task"];
