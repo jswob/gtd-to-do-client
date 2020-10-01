@@ -10,6 +10,8 @@ export default class CurrentDataService extends Service {
 
   @tracked user = null;
 
+  @tracked bucketsAndCollections = null;
+
   @computed("localStorage.previousRouteName")
   get previousRouteName() {
     return localStorage.previousRouteName;
