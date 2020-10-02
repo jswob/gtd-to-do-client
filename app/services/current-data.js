@@ -12,17 +12,6 @@ export default class CurrentDataService extends Service {
 
   @tracked bucketsAndCollections = null;
 
-  @computed("localStorage.previousRouteName")
-  get previousRouteName() {
-    return localStorage.previousRouteName;
-  }
-
-  @computed("localStorage.previousRouteModel")
-  get previousRouteModel() {
-    if (localStorage.previousRouteModel) return localStorage.previousRouteName;
-    return null;
-  }
-
   @action
   async logout() {
     const models = ["user", "bucket", "collection", "list", "task"];

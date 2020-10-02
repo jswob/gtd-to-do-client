@@ -1,5 +1,4 @@
 import Route from "@ember/routing/route";
-import { inject as service } from "@ember/service";
 
 export default class UserCollectionsCollectionRoute extends Route {
   async model({ collection_id }) {
