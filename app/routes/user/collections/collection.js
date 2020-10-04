@@ -7,6 +7,7 @@ export default class UserCollectionsCollectionRoute extends Route {
         "collection",
         collection_id
       );
+
       return collection;
     } catch (error) {
       throw error;
