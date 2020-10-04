@@ -4,6 +4,6 @@
         {{@collection.title}}</LinkTo>
     <PopUpMenu @label={{@collection.title}} class="absolute top-0 right-0 h-full p-2">
         <PopUpMenu::Button @route="user.collections.collection.edit" @model={{@collection}}>Edytuj</PopUpMenu::Button>
-        <PopUpMenu::Button @route="user.collections.collection.edit" @model={{@collection}}>Usuń</PopUpMenu::Button>
+        <PopUpMenu::Button @route="user.collections.collection.delete" @model={{@collection}}>Usuń</PopUpMenu::Button>
     </PopUpMenu>
 </div>
