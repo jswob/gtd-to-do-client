@@ -8,6 +8,8 @@
         <PopUpMenu::Button @route="user.collections.collection.list.delete" @models={{@selectedList}}>Usuń listę
         </PopUpMenu::Button>
     </PopUpMenu>
+    {{else}}
+    <LinkTo @route="user.collections" class="material-icons text-center py-1">arrow_back</LinkTo>
     {{/if}}
 </TopMenu>
 
