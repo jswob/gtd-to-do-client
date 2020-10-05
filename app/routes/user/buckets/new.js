@@ -4,7 +4,7 @@ import { hash } from "rsvp";
 
 export default class UserBucketsNewRoute extends Route {
   async model() {
-    const models = hash({
+    return hash({
       bucket: this.store.createRecord("bucket", {}),
       collections: await this.store.query("collection", {
         filter: {
@@ -12,8 +12,6 @@ export default class UserBucketsNewRoute extends Route {
         },
       }),
     });
-    console.log(models);
-    return models;
   }
 
   @action willTransition() {
