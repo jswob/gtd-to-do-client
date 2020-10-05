@@ -5,8 +5,8 @@
     @errorLabelClasses="registration-input-error-label" type="password" @label="Hasło" @property="password"
     @changeset={{@changeset}} />
 
-  <XForm::Button data-test-reg-form-button="submit" class="btn-main" @text="Zaloguj"
-    @action={{fn this.login @changeset}} />
+  <XForm::Button data-test-reg-form-button="submit" class="reg-button" @action={{fn this.login @changeset}}>Zaloguj
+  </XForm::Button>
 
   <XForm::Redirection class="text-light" data-test-reg-form-redirection @infoText="Jeżeli nie posiadasz konta"
     @linkText="ZAREJESTRUJ SIĘ" @route="sign-up" />

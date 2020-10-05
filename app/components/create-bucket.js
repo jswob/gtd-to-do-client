@@ -10,7 +10,7 @@ export default class CreateBucketComponent extends Component {
     try {
       if (changeset.isValid) {
         await changeset.save();
-        // return this.router.transitionTo("user.collections.index");
+        return this.router.transitionTo("user.collections.index");
       }
     } catch ({ errors }) {
       errors.forEach((error) => {

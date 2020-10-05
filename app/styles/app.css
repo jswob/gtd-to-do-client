@@ -31,6 +31,10 @@ body {
   @apply border-2 bg-white bg-opacity-0 text-xl py-1 px-2 w-5/6 font-semibold  mt-4 outline-none;
 }
 
+.reg-button {
+  @apply mt-4 bg-green-500 py-2 px-6 text-black w-4/6 text-xl mx-auto font-semibold rounded-lg;
+}
+
 .btn {
   @apply text-xl outline-none;
 }
@@ -63,4 +67,8 @@ body {
 
 .pop-up-menu-cords {
   top: 7%;
+}
+
+.b-0 {
+  bottom: 0;
 }
