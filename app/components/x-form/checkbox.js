@@ -24,7 +24,7 @@ export default class XFormCheckboxComponent extends Component {
   @action
   async toggleActive() {
     const { value, changeset, property } = this.args;
-    const changesetList = await changeset.list;
+    const changesetList = await changeset[property];
 
     if (this.isActive) {
       changesetList.removeObject(value);
