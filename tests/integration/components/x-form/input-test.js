@@ -51,6 +51,41 @@ module("Integration | Component | x-form/input", function (hooks) {
       .hasText("Email is too short (minimum is 6 characters)");
   });
 
+  test("it correctly manage classes on error", async function (assert) {
+    const color = "green-700";
+    const errorColor = "red-700";
+    this.set("color", color);
+    this.set("errorColor", errorColor);
+
+    await render(
+      hbs`
+        <XForm::Input @label={{this.property}} @changeset={{this.changeset}}
+          @errorColor={{this.errorColor}} @property={{this.property}} @color={{this.color}} />`
+    );
+
+    assert
+      .dom("[data-test-input='input']")
+      .hasClass(`text-${color}`, `placeholder-${color}`, `border-${color}`);
+
+    await fillIn("[data-test-input='input']", "smth");
+
+    assert
+      .dom("[data-test-input='input']")
+      .hasClass(
+        `text-${errorColor}`,
+        `placeholder-${errorColor}`,
+        `border-${errorColor}`
+      );
+
+    assert
+      .dom("[data-test-input='input']")
+      .doesNotHaveClass(
+        `text-${color}`,
+        `placeholder-${color}`,
+        `border-${color}`
+      );
+  });
+
   test("it updates value", async function (assert) {
     await render(
       hbs`<XForm::Input @label="Email" @changeset={{this.changeset}} @property={{this.property}} />`

@@ -1,4 +1,5 @@
 import Component from "@glimmer/component";
+import { computed } from "@ember/object";
 
 export default class XFormInputComponent extends Component {
   constructor() {
@@ -8,9 +9,17 @@ export default class XFormInputComponent extends Component {
     this.inputID = `input-${randomIdentifier}`;
   }
 
-  errorClasses = "inp border-red-500 text-red-500 placeholder-red-500 w-9/12";
-  basicClasses = "inp text-light placeholder-green-200 w-9/12";
+  get basicClasses() {
+    let placeholderColor = this.args.placeholderColor;
+    const color = this.args.color;
+    if (!placeholderColor) placeholderColor = color;
+    return ` text-${color} border-${color} placeholder-${placeholderColor}`;
+  }
 
+  get errorClasses() {
+    const color = this.args.errorColor;
+    return ` text-${color} border-${color} placeholder-${color}`;
+  }
   get classes() {
     if (this.error) return this.errorClasses;
 
