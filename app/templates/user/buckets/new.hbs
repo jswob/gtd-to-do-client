@@ -3,4 +3,7 @@
         arrow_back</LinkTo>
 </TopMenu>
 
+<CreateBucket @changeset={{changeset this.model.bucket this.CreateBucketValidations}}
+    @collections={{this.model.collections}} />
+
 {{outlet}}
