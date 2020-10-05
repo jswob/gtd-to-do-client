@@ -1,6 +1,8 @@
 <XForm @title="Zaloguj się" class="form-main text-main sm:w-1/2 md:1/4">
-  <XForm::Input data-test-reg-form-input="email" @label="Email" @property="email" @changeset={{@changeset}} />
-  <XForm::Input data-test-reg-form-input="password" type="password" @label="Hasło" @property="password"
+  <XForm::Input data-test-reg-form-input="email" @color="gray-300" @errorColor="red-500" class="registration-input"
+    @errorLabelClasses="registration-input-error-label" @label="Email" @property="email" @changeset={{@changeset}} />
+  <XForm::Input data-test-reg-form-input="password" @color="gray-300" @errorColor="red-500" class="registration-input"
+    @errorLabelClasses="registration-input-error-label" type="password" @label="Hasło" @property="password"
     @changeset={{@changeset}} />
 
   <XForm::Button data-test-reg-form-button="submit" class="btn-main" @text="Zaloguj"

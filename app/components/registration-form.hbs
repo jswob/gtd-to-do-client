@@ -1,9 +1,12 @@
 <XForm @title="Zarejestruj się" class="form-main text-main sm:w-1/2 md:1/4 pt-16 mx-auto max-w-screen-sm">
-  <XForm::Input data-test-reg-form-input="email" @label="Email" @property="email" @changeset={{@changeset}} />
-  <XForm::Input data-test-reg-form-input="password" type="password" @label="Hasło" @property="password"
+  <XForm::Input data-test-reg-form-input="email" @color="gray-300" @errorColor="red-500" class="registration-input"
+    @errorLabelClasses="registration-input-error-label" @label="Email" @property="email" @changeset={{@changeset}} />
+  <XForm::Input data-test-reg-form-input="password" @color="gray-300" @errorColor="red-500" class="registration-input"
+    @errorLabelClasses="registration-input-error-label" type="password" @label="Hasło" @property="password"
     @changeset={{@changeset}} />
-  <XForm::Input data-test-reg-form-input="repeatPassword" type="password" @label="Powtórz hasło"
-    @property="repeatPassword" @changeset={{@changeset}} />
+  <XForm::Input data-test-reg-form-input="repeatPassword" @color="gray-300" @errorColor="red-500"
+    class="registration-input" @errorLabelClasses="registration-input-error-label" type="password"
+    @label="Powtórz hasło" @property="repeatPassword" @changeset={{@changeset}} />
 
   <span data-test-reg-form-button="clear" onClick={{fn this.rollback @changeset}}
     class="inline-block text-center text-xl mt-6 cursor-pointer">Wyczyść
