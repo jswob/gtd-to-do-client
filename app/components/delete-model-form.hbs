@@ -1,0 +1,12 @@
+<XForm ...attributes class="mt-8 px-4">
+    <h1 class="text-3xl text-center font-semibold text-red-500">Niebezpieczeństwo!</h1>
+
+    <p data-test-delete-model-form="p" class="text-xl text-justify text-gray-200 font-medium">{{yield}}</p>
+</XForm>
+
+<div class="fixed b-0 w-full text-center">
+    <XForm::Button data-test-delete-model-form-button
+        class="text-4xl text-white bg-red-700 px-20 py-5 mb-20 rounded-lg outline-none"
+        @action={{fn this.deleteModel @model @transitionRoute}}>Usuń
+    </XForm::Button>
+</div>
