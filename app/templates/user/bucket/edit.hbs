@@ -3,4 +3,5 @@
         arrow_back</LinkTo>
 </TopMenu>
 
-{{outlet}}
+<CreateBucket @changeset={{changeset this.model.bucket this.CreateBucketValidations}} @collections={{this.collections}}
+    @buttonLabel="Edytuj" />
