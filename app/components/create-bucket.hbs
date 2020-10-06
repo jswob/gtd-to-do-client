@@ -20,12 +20,12 @@
         {{/each}}
     </div>
 
-    <h1 class="text-2xl w-5/6 mx-auto text-gray-300 font-bold mt-4"><span class="text-black">3.</span> Utwórz
+    <h1 class="text-2xl w-5/6 mx-auto text-gray-300 font-bold mt-4"><span class="text-black">3.</span> Zakończ
     </h1>
 
     <div class="text-center">
         <XForm::Button data-test-create-bucket-submit
             class="w-5/6 mx-auto mt-6 py-4 text-2xl bg-gray-800 text-white font-semibold"
-            @action={{fn this.createBucket @changeset}}>Stwórz Grupę</XForm::Button>
+            @action={{fn this.createBucket @changeset}}>{{@buttonLabel}}</XForm::Button>
     </div>
 </XForm>

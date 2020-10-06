@@ -33,10 +33,12 @@ module("Integration | Component | create-bucket", function (hooks) {
   });
 
   test("it renders all data", async function (assert) {
+    const buttonLabel = "somthing";
+    this.set("buttonLabel", buttonLabel);
     await render(
       hbs`
         <CreateBucket @changeset={{this.changeset}} 
-          @collections={{this.collections}} />`
+          @collections={{this.collections}} @buttonLabel={{this.buttonLabel}} />`
     );
 
     assert
@@ -48,7 +50,10 @@ module("Integration | Component | create-bucket", function (hooks) {
       .dom("[data-test-create-bucket-collection]")
       .exists({ count: this.get("collections").length });
 
-    assert.dom("[data-test-create-bucket-submit]").exists();
+    assert
+      .dom("[data-test-create-bucket-submit]")
+      .exists()
+      .hasText(buttonLabel);
   });
 
   test("it can't save bucket if changeset is invalid", async function (assert) {
