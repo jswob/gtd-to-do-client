@@ -3,4 +3,8 @@
         arrow_back</LinkTo>
 </TopMenu>
 
+<DeleteModelForm @transitionRoute="user.collections.index" @model={{this.model}}>Usunięcie grupy "{{this.model.title}}"
+    spowoduje jej nieodwracalną utratę! Jeżeli
+    jesteś pewien że chcesz kontynuować wcisnij przycisk "Usuń"</DeleteModelForm>
+
 {{outlet}}
