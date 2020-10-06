@@ -1,0 +1,31 @@
+<XForm data-test-form class="pt-10 mx-4">
+    <h1 class="text-2xl w-5/6 mx-auto text-gray-300 font-bold"><span class="text-black">1.</span> Podaj nazwę kolekcji
+    </h1>
+
+    <XForm::Input data-test-collection-form-input
+        class="mt-8 w-5/6 px-4 py-2 text-xl font-semibold border-4 bg-gray-200 text-black outline-none" @color="black"
+        @errorColor="red-600 " @errorLabelClasses="text-red-600 font-bold text-xl" @label="np. Najbliższe działania"
+        @placeholderColor="gray-700" @property="title" @changeset={{@changeset}} />
+
+    <h1 class="text-2xl w-5/6 mx-auto text-gray-300 font-bold my-8"><span class="text-black">2.</span> Wybierz
+        grupę
+    </h1>
+
+    <div class="text-center">
+        {{#each @buckets as |bucket|}}
+        <XForm::Radio data-test-collection-form-bucket
+            class="text-2xl w-5/6 rounded-full outline-none bg-gray-200 border-4 mb-4 border-black"
+            @activeClass="text-white bg-gray-900 border-gray-700" @label={{bucket.title}} @property="bucket"
+            @changeset={{@changeset}} @value={{bucket}} @activeValue={{this.activeBucket}} />
+        {{/each}}
+    </div>
+
+    <h1 class="text-2xl w-5/6 mx-auto text-gray-300 font-bold mt-4"><span class="text-black">3.</span> Zakończ
+    </h1>
+
+    <div class="text-center">
+        <XForm::Button data-test-collection-form-submit
+            class="w-5/6 mx-auto mt-6 py-4 text-2xl bg-gray-800 text-white font-semibold"
+            @action={{fn this.manipulateCollection @changeset}}>{{@buttonLabel}}</XForm::Button>
+    </div>
+</XForm>
