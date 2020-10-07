@@ -3,4 +3,7 @@
         arrow_back</LinkTo>
 </TopMenu>
 
+<CollectionForm @changeset={{changeset this.model.collection this.CollectionValidations}}
+    @buckets={{this.model.buckets}} @buttonLabel="Edytuj" />
+
 {{outlet}}
