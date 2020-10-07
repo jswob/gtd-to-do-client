@@ -7,7 +7,7 @@ export default class XFormRadioComponent extends Component {
 
     if (!changeset[property]) return false;
 
-    if (changeset[property].id == value.id) return true;
+    if (changeset[property].get("id") == value.get("id")) return true;
     return false;
   }
 
