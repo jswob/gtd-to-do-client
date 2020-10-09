@@ -15,6 +15,9 @@ export default class UserBucketsNewRoute extends Route {
   }
 
   @action willTransition() {
-    this.controller.model.bucket.deleteRecord();
+    const bucket = this.controller.model.bucket;
+    if (!bucket.title) {
+      bucket.deleteRecord();
+    }
   }
 }

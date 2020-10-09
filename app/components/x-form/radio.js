@@ -5,9 +5,9 @@ export default class XFormRadioComponent extends Component {
   get isActive() {
     const { changeset, value, property } = this.args;
 
-    if (!changeset[property]) return false;
+    if (!changeset.get(property)) return false;
 
-    if (changeset[property].get("id") == value.get("id")) return true;
+    if (changeset.get(property).get("id") == value.get("id")) return true;
     return false;
   }
 
@@ -15,7 +15,10 @@ export default class XFormRadioComponent extends Component {
   async toggleActive() {
     const { value, changeset, property } = this.args;
 
-    if (!this.isActive) changeset[property] = value;
-    else changeset[property] = null;
+    if (!this.isActive) {
+      await changeset.set(property, value);
+    } else {
+      changeset.set(property, null);
+    }
   }
 }
