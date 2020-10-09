@@ -22,10 +22,6 @@ module("Acceptance | bucket operations", function (hooks) {
     this.server.create("bucket", { owner: user });
 
     this.server.createList("collection", 2, { owner: user });
-    // this.server.createList("collection", 2, {
-    //   owner: user,
-    //   bucket: buckets[0],
-    // });
 
     await invalidateSession();
     await visit("/sign-in");
@@ -85,5 +81,37 @@ module("Acceptance | bucket operations", function (hooks) {
 
     assert.dom("[data-test-bucket-container='collection']").doesNotExist();
     assert.dom("[data-test-containers-box='collection']").exists({ count: 4 });
+  });
+
+  test("it updates bucket model properly", async function (assert) {
+    const updatedBucketTitle = "updated bucket title";
+
+    await click("[data-test-bucket-container='menu-button']");
+    await click("[data-test-bucket-container='link-edit']");
+
+    await fillIn("[data-test-create-bucket-input]", updatedBucketTitle);
+    await click("[data-test-create-bucket-collection]");
+
+    await click("[data-test-create-bucket-submit]");
+
+    assert.equal(currentURL(), `/user/${userData.id}/collections`);
+
+    assert
+      .dom("[data-test-bucket-container='collection']")
+      .exists({ count: 2 });
+    assert.dom("[data-test-containers-box='collection']").exists({ count: 2 });
+
+    await click("[data-test-bucket-container='menu-button']");
+    await click("[data-test-bucket-container='link-edit']");
+
+    await fillIn("[data-test-create-bucket-input]", updatedBucketTitle);
+    await click("[data-test-create-bucket-collection]");
+
+    await click("[data-test-create-bucket-submit]");
+
+    assert
+      .dom("[data-test-bucket-container='collection']")
+      .exists({ count: 4 });
+    assert.dom("[data-test-containers-box='collection']").doesNotExist();
   });
 });

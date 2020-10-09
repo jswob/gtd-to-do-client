@@ -148,7 +148,7 @@ export default function () {
         id: bucketAttrs.id,
         title: bucketAttrs.title,
         color: bucketAttrs.color,
-        owner: bucketAttrs.userId,
+        owner: bucketAttrs.owner.id,
         links: {
           collections: collectionsLink,
         },
@@ -158,6 +158,38 @@ export default function () {
     } catch (error) {
       console.log(error);
     }
+  });
+
+  this.put("/buckets/:id", async (schema, request) => {
+    const userId = checkToken(request);
+    const owner = schema.users.find(userId);
+
+    let requestBody = JSON.parse(request.requestBody).bucket;
+
+    const bucket = schema.buckets.find(request.params.id);
+
+    const collections = requestBody.collections.map((collection) =>
+      schema.collections.find(collection.id)
+    );
+
+    requestBody.owner = owner;
+    requestBody.collections = collections;
+
+    const updatedBucket = bucket.update(requestBody);
+
+    const collectionsLink = `/api/buckets/${updatedBucket.id}/collections`;
+
+    return {
+      bucket: {
+        id: updatedBucket.id,
+        title: updatedBucket.title,
+        color: updatedBucket.color,
+        owner: updatedBucket.owner.id,
+        links: {
+          collections: collectionsLink,
+        },
+      },
+    };
   });
 
   this.delete("/buckets/:id");
