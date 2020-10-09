@@ -1,15 +1,12 @@
 <XForm data-test-create-bucket-form class="pt-10 mx-4">
-    <h1 class="text-2xl w-5/6 mx-auto text-gray-300 font-bold"><span class="text-black">1.</span> Podaj nazwę grupy
-    </h1>
 
     <XForm::Input data-test-create-bucket-input
         class="mt-8 w-5/6 px-4 text-2xl font-semibold border-4 bg-gray-200 text-black outline-none" @color="black"
         @errorColor="red-600 " @errorLabelClasses="text-red-600 font-bold text-xl" @label="np. Agendy"
         @placeholderColor="gray-700" @property="title" @changeset={{@changeset}} />
 
-    <h1 class="text-2xl w-5/6 mx-auto text-gray-300 font-bold my-8"><span class="text-black">2.</span> Wybierz
-        kolekcje
-    </h1>
+
+    {{#if @collections.length}}
 
     <div class="text-center">
         {{#each @collections as |collection|}}
@@ -19,9 +16,7 @@
             @changeset={{@changeset}} @value={{collection}} />
         {{/each}}
     </div>
-
-    <h1 class="text-2xl w-5/6 mx-auto text-gray-300 font-bold mt-4"><span class="text-black">3.</span> Zakończ
-    </h1>
+    {{/if}}
 
     <div class="text-center">
         <XForm::Button data-test-create-bucket-submit
