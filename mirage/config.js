@@ -129,35 +129,31 @@ export default function () {
     const owner = schema.users.find(userId);
     let collections = [];
 
-    try {
-      let requestBody = JSON.parse(request.requestBody).bucket;
-      requestBody.collections.forEach((collection) => {
-        let collectionRecord = schema.collections.find(collection.id);
+    let requestBody = JSON.parse(request.requestBody).bucket;
+    requestBody.collections.forEach((collection) => {
+      let collectionRecord = schema.collections.find(collection.id);
 
-        collections.push(collectionRecord);
-      });
+      collections.push(collectionRecord);
+    });
 
-      requestBody.owner = owner;
-      requestBody.collections = collections;
+    requestBody.owner = owner;
+    requestBody.collections = collections;
 
-      const bucketAttrs = await schema.create("bucket", requestBody);
+    const bucketAttrs = await schema.create("bucket", requestBody);
 
-      const collectionsLink = `/api/buckets/${bucketAttrs.id}/collections`;
+    const collectionsLink = `/api/buckets/${bucketAttrs.id}/collections`;
 
-      let response = {
-        id: bucketAttrs.id,
-        title: bucketAttrs.title,
-        color: bucketAttrs.color,
-        owner: bucketAttrs.owner.id,
-        links: {
-          collections: collectionsLink,
-        },
-      };
+    let response = {
+      id: bucketAttrs.id,
+      title: bucketAttrs.title,
+      color: bucketAttrs.color,
+      owner: bucketAttrs.owner.id,
+      links: {
+        collections: collectionsLink,
+      },
+    };
 
-      return { bucket: response };
-    } catch (error) {
-      console.log(error);
-    }
+    return { bucket: response };
   });
 
   this.put("/buckets/:id", async (schema, request) => {
