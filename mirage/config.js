@@ -216,6 +216,69 @@ export default function () {
       collections: response,
     };
   });
+
+  this.get("/collections/:collection_id/lists", (schema, request) => {
+    const userId = checkToken(request);
+
+    if (!userId)
+      return new Response(401, {}, { errors: { detail: "Bad token" } });
+
+    const lists = schema.lists.all().models.filter(({ attrs }) => {
+      if (
+        attrs.ownerId == userId &&
+        attrs.collectionId == request.params.collection_id
+      )
+        return true;
+      return false;
+    });
+
+    const response = lists.map(({ attrs }) => {
+      return {
+        id: attrs.id,
+        title: attrs.title,
+        color: attrs.color,
+        collection: attrs.collection.id,
+        owner: attrs.owner.id,
+        links: {
+          tasks: `/api/lists/${attrs.id}/tasks`,
+        },
+      };
+    });
+
+    return {
+      collections: response,
+    };
+  });
+
+  this.post("/collections", async (schema, request) => {
+    const userId = checkToken(request);
+    const owner = schema.users.find(userId);
+
+    let requestBody = JSON.parse(request.requestBody).collection;
+
+    requestBody.owner = owner;
+
+    let bucketId = requestBody.bucket;
+
+    if (bucketId) requestBody.bucket = schema.buckets.find(bucketId);
+    else requestBody.bucket = null;
+
+    const collectionAttrs = await schema.create("collection", requestBody);
+
+    const listsLink = `/api/collections/${collectionAttrs.id}/lists`;
+
+    let response = {
+      id: collectionAttrs.id,
+      title: collectionAttrs.title,
+      color: collectionAttrs.color,
+      owner: collectionAttrs.owner.id,
+      links: {
+        collections: listsLink,
+      },
+    };
+
+    return { collection: response };
+  });
 }
 
 function getRequestParams(requestBody, keys) {

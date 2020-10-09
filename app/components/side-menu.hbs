@@ -12,8 +12,10 @@
     <SideMenu::UserMenuPart />
     <ContainersBox @model={{this.containersData}} />
     <div class="absolute flex bottom-0 left-0 w-full p-2 bg-green-600 text-gray-900 text-center text-md">
-        <LinkTo @route="user.buckets.new" class="w-1/2 px-2 my-auto">Utwórz grupę</LinkTo>
-        <LinkTo @route="user.collections.new" class="w-1/2 border-l border-gray-900 px-1 my-auto">Utwórz kolekcję
+        <LinkTo data-test-side-menu-link-bucket @route="user.buckets.new" class="w-1/2 px-2 my-auto">Utwórz grupę
+        </LinkTo>
+        <LinkTo data-test-side-menu-link-collection @route="user.collections.new"
+            class="w-1/2 border-l border-gray-900 px-1 my-auto">Utwórz kolekcję
         </LinkTo>
     </div>
 </aside>
