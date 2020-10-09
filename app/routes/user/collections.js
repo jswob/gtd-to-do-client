@@ -1,10 +1,7 @@
 import Route from "@ember/routing/route";
-import { inject as service } from "@ember/service";
 import { hash } from "rsvp";
 
 export default class UserCollectionsRoute extends Route {
-  @service currentData;
-
   async model() {
     try {
       const model = await hash({
@@ -15,8 +12,6 @@ export default class UserCollectionsRoute extends Route {
           },
         }),
       });
-
-      this.currentData.bucketsAndCollections = model;
 
       return model;
     } catch (error) {

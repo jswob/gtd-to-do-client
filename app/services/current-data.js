@@ -10,8 +10,6 @@ export default class CurrentDataService extends Service {
 
   @tracked user = null;
 
-  @tracked bucketsAndCollections = null;
-
   @action
   async logout() {
     const models = ["user", "bucket", "collection", "list", "task"];
