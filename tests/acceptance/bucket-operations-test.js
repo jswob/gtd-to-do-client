@@ -19,7 +19,7 @@ module("Acceptance | bucket operations", function (hooks) {
 
   hooks.beforeEach(async function () {
     let user = this.server.create("user", userData);
-    // let buckets = this.server.createList("bucket", 2);
+    this.server.create("bucket", { owner: user });
 
     this.server.createList("collection", 2, { owner: user });
     // this.server.createList("collection", 2, {
@@ -50,7 +50,7 @@ module("Acceptance | bucket operations", function (hooks) {
     assert.equal(currentURL(), `/user/${userData.id}/collections`);
 
     // It exsitst in nav-menu and on main page
-    assert.dom("[data-test-containers-box='bucket']").exists({ count: 2 });
+    assert.dom("[data-test-containers-box='bucket']").exists({ count: 4 });
   });
 
   test("it correctly creates new bucket with relationships", async function (assert) {
@@ -73,5 +73,17 @@ module("Acceptance | bucket operations", function (hooks) {
       .dom("[data-test-bucket-container='collection']")
       .exists({ count: 2 });
     assert.dom("[data-test-containers-box='collection']").exists({ count: 2 });
+  });
+
+  test("it destroys bucket model", async function (assert) {
+    await click("[data-test-bucket-container='menu-button']");
+    await click("[data-test-bucket-container='link-delete']");
+
+    await click("[data-test-delete-model-form-button]");
+
+    assert.equal(currentURL(), `/user/${userData.id}/collections`);
+
+    assert.dom("[data-test-bucket-container='collection']").doesNotExist();
+    assert.dom("[data-test-containers-box='collection']").exists({ count: 4 });
   });
 });

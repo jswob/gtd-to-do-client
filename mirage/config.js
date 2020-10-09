@@ -96,33 +96,6 @@ export default function () {
     };
   });
 
-  this.get("/collections", (schema, request) => {
-    const userId = checkToken(request);
-
-    if (!userId)
-      return new Response(401, {}, { errors: { detail: "Bad token" } });
-
-    const collections = schema.collections.all().models.filter(({ attrs }) => {
-      if (attrs.ownerId == userId && !attrs.bucketId) return true;
-      return false;
-    });
-
-    const response = collections.map(({ attrs }) => {
-      return {
-        id: attrs.id,
-        title: attrs.title,
-        color: attrs.color,
-        links: {
-          collections: `/api/collections/${attrs.id}/lists`,
-        },
-      };
-    });
-
-    return {
-      collections: response,
-    };
-  });
-
   this.get("/buckets/:bucket_id/collections", (schema, request) => {
     const userId = checkToken(request);
 
@@ -185,6 +158,35 @@ export default function () {
     } catch (error) {
       console.log(error);
     }
+  });
+
+  this.delete("/buckets/:id");
+
+  this.get("/collections", (schema, request) => {
+    const userId = checkToken(request);
+
+    if (!userId)
+      return new Response(401, {}, { errors: { detail: "Bad token" } });
+
+    const collections = schema.collections.all().models.filter(({ attrs }) => {
+      if (attrs.ownerId == userId && !attrs.bucketId) return true;
+      return false;
+    });
+
+    const response = collections.map(({ attrs }) => {
+      return {
+        id: attrs.id,
+        title: attrs.title,
+        color: attrs.color,
+        links: {
+          collections: `/api/collections/${attrs.id}/lists`,
+        },
+      };
+    });
+
+    return {
+      collections: response,
+    };
   });
 }
 
