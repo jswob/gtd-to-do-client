@@ -1,7 +1,9 @@
 <TopMenu @sideNav="true" @label="Lista Kolekcji">
-    <PopUpMenu @label="Grupy i Kolekcje">
-        <PopUpMenu::Button @route="user.buckets.new" @model={{this.currentData.user}}>Utwórz grupę</PopUpMenu::Button>
-        <PopUpMenu::Button @route="user.collections.new" @model={{this.currentData.user}}>Utwórz kolekcję
+    <PopUpMenu data-test-nav-menu-icon @label="Grupy i Kolekcje">
+        <PopUpMenu::Button data-test-nav-menu-new-bucket @route="user.buckets.new" @model={{this.currentData.user}}>
+            Utwórz grupę</PopUpMenu::Button>
+        <PopUpMenu::Button data-test-nav-menu-new-collection @route="user.collections.new"
+            @model={{this.currentData.user}}>Utwórz kolekcję
         </PopUpMenu::Button>
     </PopUpMenu>
 </TopMenu>
