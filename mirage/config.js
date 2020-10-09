@@ -1,6 +1,5 @@
 import ENV from "gtd-to-do-client/config/environment";
 import { Response } from "miragejs";
-
 export default function () {
   this.urlPrefix = `${ENV.api.host}/${ENV.api.namespace}`;
 
@@ -151,10 +150,46 @@ export default function () {
       collections: response,
     };
   });
+
+  this.post("/buckets", async (schema, request) => {
+    const userId = checkToken(request);
+    const owner = schema.users.find(userId);
+    let collections = [];
+
+    try {
+      let requestBody = JSON.parse(request.requestBody).bucket;
+      requestBody.collections.forEach((collection) => {
+        let collectionRecord = schema.collections.find(collection.id);
+
+        collections.push(collectionRecord);
+      });
+
+      requestBody.owner = owner;
+      requestBody.collections = collections;
+
+      const bucketAttrs = await schema.create("bucket", requestBody);
+
+      const collectionsLink = `/api/buckets/${bucketAttrs.id}/collections`;
+
+      let response = {
+        id: bucketAttrs.id,
+        title: bucketAttrs.title,
+        color: bucketAttrs.color,
+        owner: bucketAttrs.userId,
+        links: {
+          collections: collectionsLink,
+        },
+      };
+
+      return { bucket: response };
+    } catch (error) {
+      console.log(error);
+    }
+  });
 }
 
 function getRequestParams(requestBody, keys) {
-  const requestParams = {};
+  let requestParams = {};
 
   requestBody.split("&").forEach((param) => {
     param = param.split("=");
