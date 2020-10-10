@@ -1,9 +1,6 @@
 import { module, test } from "qunit";
 import { visit, currentURL, fillIn, click } from "@ember/test-helpers";
-import {
-  currentSession,
-  invalidateSession,
-} from "ember-simple-auth/test-support";
+import { invalidateSession } from "ember-simple-auth/test-support";
 import { setupApplicationTest } from "ember-qunit";
 import setupMirage from "ember-cli-mirage/test-support/setup-mirage";
 
@@ -67,5 +64,23 @@ module("Acceptance | list operations", function (hooks) {
       .dom("[data-test-single-list-element]")
       .exists({ count: 1 })
       .includesText(updatedListTitle);
+  });
+
+  test("it should properly delete list", async function (assert) {
+    const list = this.server.create("list", {
+      owner: this.get("user"),
+      collection: this.get("collection"),
+    });
+
+    await visit(this.get("collectionRouteLink"));
+
+    assert.dom("[data-test-single-list-element]").exists({ count: 1 });
+
+    await visit(this.get("collectionRouteLink") + `/list/${list.id}/delete`);
+    await click("[data-test-delete-model-form-button]");
+
+    assert.equal(currentURL(), this.get("collectionRouteLink"));
+
+    assert.dom("[data-test-single-list-element]").doesNotExist();
   });
 });

@@ -218,7 +218,7 @@ export default function () {
         title: attrs.title,
         color: attrs.color,
         links: {
-          collections: `/api/collections/${attrs.id}/lists`,
+          lists: `/api/collections/${attrs.id}/lists`,
         },
       };
     });
@@ -475,6 +475,8 @@ export default function () {
       list: response,
     };
   });
+
+  this.delete("/lists/:id");
 }
 
 function getRequestParams(requestBody, keys) {
