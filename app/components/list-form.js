@@ -15,7 +15,8 @@ export default class ListFormComponent extends Component {
           "route:user.collections.collection"
         ).controller.model;
         // Save collection changes
-        const list = await changeset.save();
+        await changeset.save();
+
         // Load changes from API
         await getOwner(this)
           .lookup("route:user.collections.collection")

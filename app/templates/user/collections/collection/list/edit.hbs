@@ -1,6 +1,9 @@
 <TopMenu @label="Edytuj listę">
-    <LinkTo @route="user.collections.collection" class="material-icons text-center py-1">
+    <LinkTo @route="user.collections.collection" @model={{this.model.collection}}
+        class="material-icons text-center py-1">
         arrow_back</LinkTo>
 </TopMenu>
+
+<ListForm @changeset={{changeset this.model this.ListValidations}} @buttonLabel="Edytuj" />
 
 {{outlet}}
