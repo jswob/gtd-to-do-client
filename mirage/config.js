@@ -352,6 +352,58 @@ export default function () {
     };
   });
 
+  this.get("/lists/:list_id", (schema, request) => {
+    if (!checkToken(request))
+      return new Response(401, {}, { errors: { detail: "Bad token" } });
+
+    const list = schema.lists.find(request.params.list_id);
+
+    const tasksLink = `/api/lists/${list.id}/tasks`;
+
+    let response = {
+      id: list.id,
+      title: list.title,
+      color: list.color,
+      owner: list.ownerId,
+      colleciton: list.collectionId,
+      links: {
+        tasks: tasksLink,
+      },
+    };
+
+    return { list: response };
+  });
+
+  this.get("lists/:list_id/tasks", (schema, request) => {
+    const userId = checkToken(request);
+
+    if (!userId)
+      return new Response(401, {}, { errors: { detail: "Bad token" } });
+
+    const tasks = schema.tasks.all().models.filter(({ attrs }) => {
+      if (attrs.ownerId == userId && attrs.listId == request.params.list_id)
+        return true;
+      return false;
+    });
+
+    const response = tasks.map(({ attrs }) => {
+      return {
+        id: attrs.id,
+        title: attrs.title,
+        color: attrs.color,
+        list: attrs.listId,
+        owner: attrs.ownerId,
+        links: {
+          tasks: `/api/lists/${attrs.id}/tasks`,
+        },
+      };
+    });
+
+    return {
+      tasks: response,
+    };
+  });
+
   this.post("/lists", async (schema, request) => {
     const userId = checkToken(request);
     const owner = schema.users.find(userId);
@@ -375,12 +427,53 @@ export default function () {
       title: listAttrs.title,
       color: listAttrs.color,
       owner: listAttrs.owner.id,
+      collection: listAttrs.collectionId,
       links: {
         tasks: tasksLink,
       },
     };
 
     return { list: response };
+  });
+
+  this.put("/lists/:list_id", (schema, request) => {
+    // Get owner model
+    const userId = checkToken(request);
+    const owner = schema.users.find(userId);
+    // Get request params in object form
+    let requestBody = JSON.parse(request.requestBody).list;
+
+    const list = schema.lists.find(request.params.list_id);
+
+    let tasks = null;
+    if (requestBody.tasks)
+      tasks = requestBody.tasks.map((list) => schema.tasks.find(list.id));
+
+    if (requestBody.collection)
+      requestBody.collection = schema.collections.find(requestBody.collection);
+    else requestBody.collection = null;
+
+    requestBody.owner = owner;
+    requestBody.tasks = tasks;
+
+    const updatedList = list.update(requestBody);
+
+    const tasksLink = `/api/lists/${updatedList.id}/tasks`;
+
+    const response = {
+      id: updatedList.id,
+      title: updatedList.title,
+      color: updatedList.color,
+      owner: updatedList.ownerId,
+      collection: updatedList.collectionId,
+      links: {
+        tasks: tasksLink,
+      },
+    };
+
+    return {
+      list: response,
+    };
   });
 }
 
