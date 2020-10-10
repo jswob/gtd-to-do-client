@@ -1,0 +1,12 @@
+<XForm data-test-list-form class="pt-10 mx-4">
+    <XForm::Input data-test-list-form-input
+        class="my-8 w-5/6 px-4 py-2 text-xl font-semibold border-4 bg-gray-200 text-black outline-none" @color="black"
+        @errorColor="red-600 " @errorLabelClasses="text-red-600 font-bold text-xl" @label="np. W domu"
+        @placeholderColor="gray-700" @property="title" @changeset={{@changeset}} />
+
+    <div class="text-center">
+        <XForm::Button data-test-list-form-submit
+            class="w-5/6 mx-auto mt-6 py-4 text-2xl bg-gray-800 text-white font-semibold"
+            @action={{fn this.manipulateList @changeset}}>{{@buttonLabel}}</XForm::Button>
+    </div>
+</XForm>
