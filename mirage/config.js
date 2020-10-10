@@ -217,6 +217,19 @@ export default function () {
     };
   });
 
+  // this.get("/collections/:collection_id");
+
+  this.get("/collections/:collection_id", ({ collections }, request) => {
+    if (!checkToken(request))
+      return new Response(401, {}, { errors: { detail: "Bad token" } });
+
+    const collection = collections.find(request.params.collection_id);
+
+    return {
+      collection: collection,
+    };
+  });
+
   this.get("/collections/:collection_id/lists", (schema, request) => {
     const userId = checkToken(request);
 
@@ -278,6 +291,18 @@ export default function () {
     };
 
     return { collection: response };
+  });
+
+  this.delete("/collections/:collection_id", ({ collections }, request) => {
+    if (!checkToken(request))
+      return new Response(401, {}, { errors: { detail: "Bad token" } });
+
+    const collection = collections.find(request.params.collection_id);
+    collection.destroy();
+
+    return {
+      message: "Successfully deleted",
+    };
   });
 }
 

@@ -10,12 +10,8 @@ export default class DeleteModelFormComponent extends Component {
     try {
       await model.destroyRecord();
       if (transitionRoute) this.router.transitionTo(transitionRoute);
-    } catch ({ errors }) {
-      errors.forEach((error) => {
-        for (let [key, value] of Object.entries(error)) {
-          changeset.pushErrors(key, `${key} ${value}`);
-        }
-      });
+    } catch (error) {
+      throw error;
     }
   }
 }

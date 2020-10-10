@@ -18,8 +18,8 @@ module("Acceptance | collection operations", function (hooks) {
   };
 
   hooks.beforeEach(async function () {
-    let user = this.server.create("user", userData);
-    this.server.create("bucket", { owner: user });
+    const user = this.server.create("user", userData);
+    this.set("user", user);
 
     await invalidateSession();
     await visit("/sign-in");
@@ -31,6 +31,8 @@ module("Acceptance | collection operations", function (hooks) {
   });
 
   test("it should properly create collection", async function (assert) {
+    await this.server.create("bucket", { owner: this.get("user") });
+    await visit("/");
     const collectionTitle = "some title";
 
     await click("[data-test-nav-menu-icon]");
@@ -47,7 +49,6 @@ module("Acceptance | collection operations", function (hooks) {
     const bucketCollectionTitle = "other title";
 
     await click("[data-test-side-menu-link-collection]");
-
     await fillIn("[data-test-collection-form-input]", bucketCollectionTitle);
     await click("[data-test-checkbox-button]");
     await click("[data-test-form-button]");
@@ -60,5 +61,43 @@ module("Acceptance | collection operations", function (hooks) {
       .dom("[data-test-containers-box='collection']")
       .exists({ count: 1 })
       .includesText(collectionTitle);
+  });
+
+  test("it destroys collection model properly", async function (assert) {
+    const bucket = this.server.create("bucket", { owner: this.get("user") });
+    const bucketCollection = this.server.create("collection", {
+      owner: this.get("user"),
+      bucket: bucket,
+    });
+    const freeCollection = this.server.create("collection", {
+      owner: this.get("user"),
+    });
+    await visit("/");
+
+    await visit(
+      `/user/${this.get("user.id")}/collections/collection/${
+        bucketCollection.id
+      }/delete`
+    );
+
+    await click("[data-test-form-button]");
+
+    assert.equal(currentURL(), `/user/${this.get("user.id")}/collections`);
+
+    assert.dom("[data-test-bucket-container='collection']").doesNotExist();
+    assert.dom("[data-test-containers-box='collection']").exists({ count: 2 });
+
+    await visit(
+      `/user/${this.get("user.id")}/collections/collection/${
+        freeCollection.id
+      }/delete`
+    );
+
+    await click("[data-test-form-button]");
+
+    assert.equal(currentURL(), `/user/${this.get("user.id")}/collections`);
+
+    assert.dom("[data-test-bucket-container='collection']").doesNotExist();
+    assert.dom("[data-test-containers-box='collection']").doesNotExist();
   });
 });
