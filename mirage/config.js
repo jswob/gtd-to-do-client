@@ -351,6 +351,37 @@ export default function () {
       message: "Successfully deleted",
     };
   });
+
+  this.post("/lists", async (schema, request) => {
+    const userId = checkToken(request);
+    const owner = schema.users.find(userId);
+
+    let requestBody = JSON.parse(request.requestBody).list;
+
+    requestBody.owner = owner;
+
+    let collectionId = requestBody.collection;
+
+    if (collectionId)
+      requestBody.collection = schema.collections.find(collectionId);
+    else requestBody.collection = null;
+
+    const listAttrs = await schema.create("list", requestBody);
+
+    const tasksLink = `/api/lists/${listAttrs.id}/tasks`;
+
+    let response = {
+      id: listAttrs.id,
+      title: listAttrs.title,
+      color: listAttrs.color,
+      owner: listAttrs.owner.id,
+      links: {
+        tasks: tasksLink,
+      },
+    };
+
+    return { list: response };
+  });
 }
 
 function getRequestParams(requestBody, keys) {
