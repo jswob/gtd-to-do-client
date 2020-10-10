@@ -3,4 +3,7 @@
         arrow_back</LinkTo>
 </TopMenu>
 
-{{outlet}}
+<DeleteModelForm @transitionRoute="user.collections.collection.index" @model={{this.model}}>Wraz z usunięciem
+    listy
+    "{{this.model.title}}" usunięte zostaną wszystkie powiązane z nią zadania. Skasowanie listy jest
+    nieodwracalne. Jeżeli jesteś pewien że chcesz kontynuować wciśnij przycisk "Usuń"</DeleteModelForm>
