@@ -100,4 +100,65 @@ module("Acceptance | collection operations", function (hooks) {
     assert.dom("[data-test-bucket-container='collection']").doesNotExist();
     assert.dom("[data-test-containers-box='collection']").doesNotExist();
   });
+
+  test("it updates collection model properly", async function (assert) {
+    const collectionUpdatedTitle = "Some new title";
+
+    const bucket = this.server.create("bucket", { owner: this.get("user") });
+    const collection = this.server.create("collection", {
+      owner: this.get("user"),
+      bucket: bucket,
+    });
+
+    this.set("collection", collection);
+
+    await visit(`/user/${this.get("user.id")}`);
+
+    await visit(
+      `/user/${this.get("user.id")}/collections/collection/${
+        collection.id
+      }/edit`
+    );
+
+    await fillIn("[data-test-collection-form-input]", collectionUpdatedTitle);
+    await click("[data-test-collection-form-bucket]");
+
+    await click("[data-test-collection-form-submit]");
+
+    assert.equal(
+      currentURL(),
+      `/user/${this.get("user.id")}/collections/collection/${this.get(
+        "collection.id"
+      )}`
+    );
+
+    assert.dom("[data-test-bucket-container='collection']").doesNotExist();
+    assert
+      .dom("[data-test-containers-box='collection']")
+      .exists({ count: 1 })
+      .includesText(collectionUpdatedTitle);
+
+    await visit(
+      `/user/${this.get("user.id")}/collections/collection/${this.get(
+        "collection.id"
+      )}/edit`
+    );
+
+    await click("[data-test-collection-form-bucket]");
+
+    await click("[data-test-collection-form-submit]");
+
+    assert.equal(
+      currentURL(),
+      `/user/${this.get("user.id")}/collections/collection/${this.get(
+        "collection.id"
+      )}`
+    );
+
+    assert
+      .dom("[data-test-bucket-container='collection']")
+      .exists({ count: 1 })
+      .includesText(collectionUpdatedTitle);
+    assert.dom("[data-test-containers-box='collection']").doesNotExist();
+  });
 });

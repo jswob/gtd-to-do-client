@@ -96,6 +96,17 @@ export default function () {
     };
   });
 
+  this.get("/buckets/:bucket_id", ({ buckets }, request) => {
+    if (!checkToken(request))
+      return new Response(401, {}, { errors: { detail: "Bad token" } });
+
+    const bucket = buckets.find(request.params.bucket_id);
+
+    return {
+      bucket: bucket,
+    };
+  });
+
   this.get("/buckets/:bucket_id/collections", (schema, request) => {
     const userId = checkToken(request);
 
@@ -217,8 +228,6 @@ export default function () {
     };
   });
 
-  // this.get("/collections/:collection_id");
-
   this.get("/collections/:collection_id", ({ collections }, request) => {
     if (!checkToken(request))
       return new Response(401, {}, { errors: { detail: "Bad token" } });
@@ -250,8 +259,8 @@ export default function () {
         id: attrs.id,
         title: attrs.title,
         color: attrs.color,
-        collection: attrs.collection.id,
-        owner: attrs.owner.id,
+        collection: attrs.collectionId,
+        owner: attrs.ownerId,
         links: {
           tasks: `/api/lists/${attrs.id}/tasks`,
         },
@@ -259,7 +268,45 @@ export default function () {
     });
 
     return {
-      collections: response,
+      lists: response,
+    };
+  });
+
+  this.put("/collections/:collection_id", (schema, request) => {
+    // Get owner model
+    const userId = checkToken(request);
+    const owner = schema.users.find(userId);
+    // Get request params in object form
+    let requestBody = JSON.parse(request.requestBody).collection;
+
+    const collection = schema.collections.find(request.params.collection_id);
+
+    let lists = null;
+    if (requestBody.lists)
+      lists = requestBody.lists.map((list) => schema.lists.find(list.id));
+
+    if (requestBody.bucket)
+      requestBody.bucket = schema.buckets.find(requestBody.bucket);
+    else requestBody.bucket = null;
+
+    requestBody.owner = owner;
+    requestBody.collections = lists;
+
+    const updatedCollection = collection.update(requestBody);
+
+    const listsLink = `/api/collections/${updatedCollection.id}/lists`;
+
+    return {
+      collection: {
+        id: updatedCollection.id,
+        title: updatedCollection.title,
+        color: updatedCollection.color,
+        owner: updatedCollection.ownerId,
+        bucket: updatedCollection.bucketId,
+        links: {
+          lists: listsLink,
+        },
+      },
     };
   });
 
