@@ -1,25 +1,34 @@
 <TopMenu @sideNav="true" @label={{@collection.title}} @model={{@bucektsAndCollections}}>
     {{#if @collection.lists.length}}
-    <PopUpMenu @label={{@selectedList}}>
-        <PopUpMenu::Button @route="user.collections.collection.lists.new" @model={{@collection}}>Nowa lista
+    <PopUpMenu data-test-main-page-pop-up-menu @label={{@selectedList}}>
+        <PopUpMenu::Button data-test-main-page-pop-up-menu-create @route="user.collections.collection.lists.new"
+            @model={{@collection}}>Nowa lista
         </PopUpMenu::Button>
-        <PopUpMenu::Button @route="user.collections.collection.list.edit" @model={{@selectedList}}>Edytuj listę
+        <PopUpMenu::Button data-test-main-page-pop-up-menu-edit @route="user.collections.collection.list.edit"
+            @model={{@selectedList}}>Edytuj listę
         </PopUpMenu::Button>
-        <PopUpMenu::Button @route="user.collections.collection.list.delete" @models={{@selectedList}}>Usuń listę
+        <PopUpMenu::Button data-test-main-page-pop-up-menu-delete @route="user.collections.collection.list.delete"
+            @models={{@selectedList}}>Usuń listę
         </PopUpMenu::Button>
     </PopUpMenu>
     {{else}}
-    <LinkTo @route="user.collections" class="material-icons text-center py-1">arrow_back</LinkTo>
+    <LinkTo data-test-arrow-back @route="user.collections" class="material-icons text-center py-1">arrow_back</LinkTo>
     {{/if}}
 </TopMenu>
 
 <article class="container text-center">
+    {{@collection.lists.length}}
     {{#if @collection.lists.length}}
-    {{!-- TO DO --}}
+    {{#each @collection.lists as |list|}}
+    <h1 data-test-single-list-element class="text-2xl text-black">
+        {{list.title}}
+    </h1>
+    {{/each}}
     {{else}}
     <h1 class="text-2xl text-center mt-16 mb-8 mx-8 font-bold text-gray-300">Nie utworzyłeś jeszcze żadnej listy zadań
         do wykonania!</h1>
-    <LinkTo class="text-2xl font-extrabold bg-green-600 rounded-lg py-4 w-64 mt-16 mx-auto px-12 hover:bg-green-400"
+    <LinkTo data-test-main-page-create-list
+        class="text-2xl font-extrabold bg-green-600 rounded-lg py-4 w-64 mt-16 mx-auto px-12 hover:bg-green-400"
         @route="user.collections.collection.lists.new">UTWÓRZ LISTĘ</LinkTo>
     {{/if}}
 </article>
