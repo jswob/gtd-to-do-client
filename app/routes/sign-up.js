@@ -17,6 +17,7 @@ export default class SignUpRoute extends Route {
   }
 
   @action willTransition() {
-    this.controller.model.deleteRecord();
+    const model = this.controller.model;
+    if (!model.email) model.deleteRecord();
   }
 }
