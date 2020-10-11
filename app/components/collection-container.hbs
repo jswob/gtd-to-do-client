@@ -2,8 +2,11 @@
     class="relative block w-5/6 mx-auto mb-2 py-2 text-md text-gray-900 bg-green-500 text-center rounded-lg">
     <LinkTo data-test-collection-container="link" @route="user.collections.collection" @model={{@collection}}>
         {{@collection.title}}</LinkTo>
-    <PopUpMenu @label={{@collection.title}} class="absolute top-0 right-0 h-full p-2">
-        <PopUpMenu::Button @route="user.collections.collection.edit" @model={{@collection}}>Edytuj</PopUpMenu::Button>
-        <PopUpMenu::Button @route="user.collections.collection.delete" @model={{@collection}}>Usuń</PopUpMenu::Button>
+    <PopUpMenu data-test-collection-container="menu-button" @label={{@collection.title}}
+        class="absolute top-0 right-0 h-full p-2">
+        <PopUpMenu::Button data-test-collection-container="link-edit" @route="user.collections.collection.edit"
+            @model={{@collection}}>Edytuj</PopUpMenu::Button>
+        <PopUpMenu::Button data-test-collection-container="link-delete" @route="user.collections.collection.delete"
+            @model={{@collection}}>Usuń</PopUpMenu::Button>
     </PopUpMenu>
 </div>
