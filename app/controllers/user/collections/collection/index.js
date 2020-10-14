@@ -1,10 +1,19 @@
 import Controller from "@ember/controller";
 import { tracked } from "@glimmer/tracking";
-import { action } from "@ember/object";
+import { action, computed } from "@ember/object";
 
 export default class UserCollectionsCollectionIndexController extends Controller {
-  queryParams = ["selectedList"];
-
   @tracked
   selectedList = null;
+
+  @computed("model", "selectedList")
+  get currentList() {
+    if (this.model.lists.includes(this.selectedList)) return this.selectedList;
+
+    return this.model.lists.firstObject;
+  }
+
+  @action chooseList(list) {
+    this.selectedList = list;
+  }
 }
