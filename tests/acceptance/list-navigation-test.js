@@ -74,4 +74,25 @@ module("Acceptance | list navigation", function (hooks) {
 
     assert.equal(currentURL(), this.get("collectionLink"));
   });
+
+  test("it properly navigates to delete list", async function (assert) {
+    const list = this.server.create("list", {
+      collection: this.get("collection"),
+      owner: this.get("user"),
+    });
+
+    await visit(this.get("collectionLink"));
+
+    await click("[data-test-pop-up-menu-icon]");
+    await click("[data-test-pop-up-menu-delete-list]");
+
+    assert.equal(
+      currentURL(),
+      `${this.get("collectionLink")}/list/${list.id}/delete`
+    );
+
+    await click("[data-test-arrow-back]");
+
+    assert.equal(currentURL(), this.get("collectionLink"));
+  });
 });
