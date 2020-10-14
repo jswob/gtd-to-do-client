@@ -41,7 +41,7 @@ module("Acceptance | list operations", function (hooks) {
     assert.equal(currentURL(), this.get("collectionRouteLink"));
 
     assert
-      .dom("[data-test-single-list-element]")
+      .dom("[data-test-list-element]")
       .exists({ count: 1 })
       .includesText(listTitle);
   });
@@ -61,7 +61,7 @@ module("Acceptance | list operations", function (hooks) {
     assert.equal(currentURL(), this.get("collectionRouteLink"));
 
     assert
-      .dom("[data-test-single-list-element]")
+      .dom("[data-test-list-element]")
       .exists({ count: 1 })
       .includesText(updatedListTitle);
   });
@@ -74,13 +74,13 @@ module("Acceptance | list operations", function (hooks) {
 
     await visit(this.get("collectionRouteLink"));
 
-    assert.dom("[data-test-single-list-element]").exists({ count: 1 });
+    assert.dom("[data-test-list-element]").exists({ count: 1 });
 
     await visit(this.get("collectionRouteLink") + `/list/${list.id}/delete`);
     await click("[data-test-delete-model-form-button]");
 
     assert.equal(currentURL(), this.get("collectionRouteLink"));
 
-    assert.dom("[data-test-single-list-element]").doesNotExist();
+    assert.dom("[data-test-list-element]").doesNotExist();
   });
 });
