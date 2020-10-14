@@ -1,0 +1,2 @@
+<button ...attributes class={{if this.isActive @activeClasses @unactiveClasses}} type="button"
+    {{on "click" (fn @setListAction @list)}}>{{@list.title}}</button>
