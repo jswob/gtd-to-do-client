@@ -36,7 +36,11 @@ module("Acceptance | list navigation", function (hooks) {
   test("it properly navigates to create list", async function (assert) {
     await visit(this.get("collectionLink"));
 
+<<<<<<< HEAD
     await click("[data-test-create-first-list-link]");
+=======
+    await click("[data-test-main-page-create-list]");
+>>>>>>> a339e1a275468adf70f2f5853fdbb6eb19fe2fb4
 
     assert.equal(currentURL(), this.get("collectionLink") + "/lists/new");
 
@@ -45,8 +49,13 @@ module("Acceptance | list navigation", function (hooks) {
 
     assert.equal(currentURL(), this.get("collectionLink"));
 
+<<<<<<< HEAD
     await click("[data-test-pop-up-menu-icon]");
     await click("[data-test-pop-up-menu-new-list]");
+=======
+    await click("[data-test-main-page-pop-up-menu]");
+    await click("[data-test-main-page-pop-up-menu-create]");
+>>>>>>> a339e1a275468adf70f2f5853fdbb6eb19fe2fb4
 
     assert.equal(currentURL(), this.get("collectionLink") + "/lists/new");
 
