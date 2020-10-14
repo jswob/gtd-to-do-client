@@ -35,7 +35,6 @@ module("Acceptance | list navigation", function (hooks) {
 
   test("it properly navigates to create list", async function (assert) {
     await visit(this.get("collectionLink"));
-
     await click("[data-test-create-first-list-link]");
 
     assert.equal(currentURL(), this.get("collectionLink") + "/lists/new");
@@ -49,6 +48,27 @@ module("Acceptance | list navigation", function (hooks) {
     await click("[data-test-pop-up-menu-new-list]");
 
     assert.equal(currentURL(), this.get("collectionLink") + "/lists/new");
+
+    await click("[data-test-arrow-back]");
+
+    assert.equal(currentURL(), this.get("collectionLink"));
+  });
+
+  test("it properly navigates to edit list", async function (assert) {
+    const list = this.server.create("list", {
+      collection: this.get("collection"),
+      owner: this.get("user"),
+    });
+
+    await visit(this.get("collectionLink"));
+
+    await click("[data-test-pop-up-menu-icon]");
+    await click("[data-test-pop-up-menu-edit-list]");
+
+    assert.equal(
+      currentURL(),
+      `${this.get("collectionLink")}/list/${list.id}/edit`
+    );
 
     await click("[data-test-arrow-back]");
 
