@@ -1,17 +1,16 @@
-<button ...attributes class="material-icons text-center h-full" data-test-pop-up-menu="icon" type="button"
+<button ...attributes class="text-center h-full" data-test-pop-up-menu="icon" type="button"
     {{on "click" (stop-propagation this.toggleOpen)}}>
-    more_vert
+    {{@buttonText}}
 </button>
 
 
 {{#if this.isOpen}}
-<div data-test-pop-up-menu="background" class="bg-active {{if this.isOpen "bg-active-open"}}"
+<button type="button" data-test-pop-up-menu="background" class="bg-active {{if this.isOpen "bg-active-open"}}"
     {{on "click" this.toggleOpen}}>
-</div>
+</button>
 
 <div data-test-pop-up-menu="menu"
-    class="fixed pop-up-menu-cords left-0 right-0 mt-32 pb-2 rounded-lg text-center mx-auto cursor-default w-3/5 sm:w-2/5 md:w-2/6 xl:w-1/5 bg-green-500 z-20">
-    <h2 class="text-xl pt-1 pb-2 text-gray-900">{{@label}}</h2>
+    class="fixed pop-up-menu-cords left-0 right-0 mt-32 py-2 rounded-lg text-center mx-auto cursor-default w-4/5 sm:w-3/5 md:w-2/6 xl:w-2/5 z-20 {{@menuClasses}}">
     {{yield}}
 </div>
 {{/if}}

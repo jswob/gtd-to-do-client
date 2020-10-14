@@ -1,5 +1,6 @@
 <TopMenu @sideNav="true" @label="Lista Kolekcji">
-    <PopUpMenu data-test-nav-menu-icon @label="Grupy i Kolekcje">
+    <PopUpMenu data-test-nav-menu-icon @buttonText="more_vert" class="material-icons" @menuClasses="bg-green-500">
+        <h2 class="text-xl pt-1 pb-2 text-gray-900">Grupy i Kolekcje</h2>
         <PopUpMenu::Button data-test-nav-menu-new-bucket @route="user.buckets.new" @model={{this.currentData.user}}>
             Utwórz grupę</PopUpMenu::Button>
         <PopUpMenu::Button data-test-nav-menu-new-collection @route="user.collections.new"

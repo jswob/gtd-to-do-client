@@ -7,10 +7,7 @@ module("Integration | Component | pop-up-menu", function (hooks) {
   setupRenderingTest(hooks);
 
   test("it should open menu on icon click and close on background click", async function (assert) {
-    const label = "some text";
-    this.set("label", label);
-
-    await render(hbs`<PopUpMenu @label={{this.label}} />`);
+    await render(hbs`<PopUpMenu />`);
 
     assert.dom("[data-test-pop-up-menu='icon']").exists();
     assert.dom("[data-test-pop-up-menu='background']").doesNotExist();
@@ -21,7 +18,6 @@ module("Integration | Component | pop-up-menu", function (hooks) {
     assert.dom("[data-test-pop-up-menu='icon']").exists();
     assert.dom("[data-test-pop-up-menu='background']").exists();
     assert.dom("[data-test-pop-up-menu='menu']").exists();
-    assert.dom("[data-test-pop-up-menu='menu'] h2").hasText(label);
 
     await click("[data-test-pop-up-menu='background']");
 

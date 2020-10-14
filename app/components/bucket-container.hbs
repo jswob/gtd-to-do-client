@@ -1,8 +1,9 @@
 <div ...attributes class="w-5/6 mx-auto mb-3 rounded-lg bg-green-800 text-center pb-2">
     <div class="relative w-full text-gray-300">
         <h3 class="w-full text-xl text-center py-2">{{@bucket.title}}</h3>
-        <PopUpMenu data-test-bucket-container="menu-button" @label={{@bucket.title}}
-            class="absolute top-0 right-0 h-full p-2">
+        <PopUpMenu data-test-bucket-container="menu-button" @buttonText="more_vert"
+            class="material-icons absolute top-0 right-0 h-full p-2" @menuClasses="bg-green-500">
+            <h2 class="text-xl pt-1 pb-2 text-gray-900">{{@bucket.title}}</h2>
             <PopUpMenu::Button data-test-bucket-container="link-edit" @route="user.bucket.edit" @model={{@bucket}}>
                 Edytuj</PopUpMenu::Button>
             <PopUpMenu::Button data-test-bucket-container="link-delete" @route="user.bucket.delete" @model={{@bucket}}>

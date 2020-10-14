@@ -1,6 +1,7 @@
 <TopMenu @sideNav="true" @label={{this.model.collection.title}}>
     {{#if this.model.collection.lists.length}}
-    <PopUpMenu data-test-pop-up-menu-icon @label={{this.currentList.title}}>
+    <PopUpMenu data-test-pop-up-menu-icon @buttonText="more_vert" class="material-icons" @menuClasses="bg-green-500">
+        <h2 class="text-xl pt-1 pb-2 text-gray-900">{{this.currentList.title}}</h2>
         <PopUpMenu::Button data-test-pop-up-menu-new-list @route="user.collections.collection.lists.new"
             @model={{this.model.collection}}>Nowa lista
         </PopUpMenu::Button>
@@ -27,6 +28,8 @@
         {{/each}}
     </nav>
 
+
+    <TasksMenu @list={{this.currentList}} />
     {{else}}
     <h1 class="text-2xl text-center mt-16 mb-8 mx-8 font-bold text-gray-300">Nie utworzyłeś jeszcze żadnej listy zadań
         do wykonania!</h1>
