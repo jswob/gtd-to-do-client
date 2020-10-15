@@ -19,7 +19,7 @@
 
 <article class="text-center">
     {{#if this.model.lists.length}}
-    <nav class="flex bg-gray-900 pt-2 hidden-scrollbar text-green-500 overflow-x-scroll h-full w-full">
+    <nav class="sticky top-0 flex bg-gray-900 pt-2 hidden-scrollbar text-green-500 overflow-x-scroll h-full w-full">
         {{#each this.model.lists as |list|}}
         <ListElement data-test-list-element
             class="font-bold text-xl px-3 mx-3 pb-2 whitespace-no-wrap box-content border-green-500 focus:outline-none"
