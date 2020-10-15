@@ -17,10 +17,11 @@ export default class TaskSerializer extends RESTSerializer {
     return super.normalizeResponse(...arguments);
   }
 
-  serialize(snapshot, options) {
+  serialize(snapshot, _options) {
     let json = {
       content: snapshot.attr("content"),
       is_done: snapshot.attr("isDone"),
+      list: snapshot.belongsTo("list", { id: true }),
     };
 
     return json;
