@@ -353,9 +353,7 @@ export default function () {
   });
 
   this.get("/lists/:list_id", (schema, request) => {
-    if (!checkToken(request))
-      return new Response(401, {}, { errors: { detail: "Bad token" } });
-
+    console.log("y");
     const list = schema.lists.find(request.params.list_id);
 
     const tasksLink = `/api/lists/${list.id}/tasks`;
@@ -375,14 +373,8 @@ export default function () {
   });
 
   this.get("lists/:list_id/tasks", (schema, request) => {
-    const userId = checkToken(request);
-
-    if (!userId)
-      return new Response(401, {}, { errors: { detail: "Bad token" } });
-
     const tasks = schema.tasks.all().models.filter(({ attrs }) => {
-      if (attrs.ownerId == userId && attrs.listId == request.params.list_id)
-        return true;
+      if (attrs.listId == request.params.list_id) return true;
       return false;
     });
 
