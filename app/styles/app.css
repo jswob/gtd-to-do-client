@@ -81,3 +81,55 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.btn-task {
+  @apply text-2xl font-bold py-4;
+}
+
+.btn-task-new {
+  @apply bg-green-500;
+}
+
+.btn-task-edit {
+  @apply bg-blue-500;
+}
+
+.btn-task-delete {
+  @apply bg-red-500;
+}
+
+.task-form-create {
+  @apply bg-green-500;
+}
+
+.task-form-create button {
+  @apply bg-green-600 border-black text-black shadow-md font-bold mt-4;
+}
+
+.task-form-create-button {
+  @apply text-2xl font-bold bg-green-500 w-full py-4;
+}
+
+.task-form-edit {
+  @apply bg-blue-400;
+}
+
+.task-form-edit button {
+  @apply bg-blue-600 border-black text-black shadow-md font-bold mt-4;
+}
+
+.task-form-edit-button {
+  @apply text-2xl font-bold bg-blue-400 w-full py-4;
+}
+
+.delete-tasks {
+  @apply bg-red-400 px-2;
+}
+
+.delete-tasks-button {
+  @apply text-2xl font-bold bg-red-400 w-full py-4;
+}
+
+.delete-tasks button {
+  @apply bg-red-600 border-black text-black shadow-md font-bold mt-4;
+}
