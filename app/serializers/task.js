@@ -22,6 +22,7 @@ export default class TaskSerializer extends RESTSerializer {
       content: snapshot.attr("content"),
       is_done: snapshot.attr("isDone"),
       list: snapshot.belongsTo("list", { id: true }),
+      owner: snapshot.belongsTo("owner", { id: true }),
     };
 
     return json;
