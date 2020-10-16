@@ -1,0 +1,21 @@
+<button class="text-center h-full {{@buttonClasses}}" data-test-pop-up-form-toggle type="button"
+    {{on "click" (stop-propagation this.toggleOpen)}}>
+    {{@toggleText}}
+</button>
+
+
+{{#if this.isOpen}}
+<button type="button" data-test-pop-up-form-bg class="bg-active {{if this.isOpen "bg-active-open"}}"
+    {{on "click" (stop-propagation this.toggleOpen)}}>
+</button>
+
+<div data-test-pop-up-form-wrapper ...attributes
+    class="fixed pop-up-menu-cords left-0 right-0 mt-32 py-3 rounded-lg text-center mx-auto cursor-default w-4/5 sm:w-3/5 md:w-2/6 xl:w-2/5 z-20"
+    {{on "click" (stop-propagation this.stopPropagationAction)}}>
+    {{yield}}
+    <button data-test-pop-up-form-button type="button" class="text-xl border-2 border-black w-5/6 mx-auto py-2"
+        {{on "click" (fn this.triggerAction @action)}}>
+        {{@buttonLabel}}
+    </button>
+</div>
+{{/if}}
