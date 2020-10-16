@@ -1,8 +1,8 @@
-<PopUpForm ...attributes class="{{if @editMode "task-form-edit" "task-form-create"}}" @changeset={{@changeset}}
+<PopUpForm class="{{if @editMode "task-form-edit" "task-form-create"}}" @changeset={{@changeset}}
     @changesetRollbackProperty="content"
     @buttonClasses="{{if @editMode "task-form-edit-button" "task-form-create-button"}}"
     @toggleText={{if @editMode "Edytuj" "Utwórz nowe zadanie"}} @buttonLabel={{if @editMode "Edytuj" "Utwórz"}}
-    @action={{fn this.manipulateTask @changeset}}>
+    @action={{fn this.manipulateTask @changeset}} @dataTest={{@dataTest}}>
 
     <h3 data-test-task-form-title class="text-2xl font-bold">{{if @editMode "Edytuj" "Nowe zadanie"}}</h3>
 

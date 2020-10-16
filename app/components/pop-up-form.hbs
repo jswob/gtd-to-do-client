@@ -1,4 +1,4 @@
-<button class="text-center h-full {{@buttonClasses}}" data-test-pop-up-form-toggle type="button"
+<button data-test={{@dataTest}} class="text-center h-full {{@buttonClasses}}" data-test-pop-up-form-toggle type="button"
     {{on "click" (stop-propagation this.toggleOpen)}}>
     {{@toggleText}}
 </button>
