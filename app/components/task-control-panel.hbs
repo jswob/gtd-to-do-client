@@ -1,0 +1,12 @@
+<div class="fixed flex b-0 l-0 w-full">
+    {{#if this.isOnlyOneActive}}
+    <TaskForm @dataTest="task-control-panel-edit" @editMode="true"
+        @changeset={{changeset @activeTasks.firstObject this.TaskValidations}} />
+    <DeleteTasks @dataTest="task-control-panel-delete" @tasks={{@activeTasks}} />
+    {{else if @activeTasks.length}}
+    <DeleteTasks @dataTest="task-control-panel-delete" @tasks={{@activeTasks}} />
+    {{else}}
+    <TaskForm @dataTest="task-control-panel-create" @changeset={{this.changeset}}
+        @clearAction={{this.refreshNewTask}} />
+    {{/if}}
+</div>
