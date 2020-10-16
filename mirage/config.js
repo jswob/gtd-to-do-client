@@ -477,6 +477,36 @@ export default function () {
   });
 
   this.delete("/lists/:id");
+
+  this.post("/tasks", async (schema, request) => {
+    let requestBody = JSON.parse(request.requestBody).task;
+
+    console.log(requestBody);
+
+    if (!requestBody.list) var userId = checkToken(request);
+    else var userId = requestBody.owner;
+
+    var owner = schema.users.find(userId);
+
+    requestBody.owner = owner;
+
+    let listId = requestBody.list;
+
+    if (listId) requestBody.list = schema.lists.find(listId);
+    else requestBody.list = null;
+
+    const taskAttrs = await schema.create("task", requestBody);
+
+    let response = {
+      id: taskAttrs.id,
+      content: taskAttrs.content,
+      is_done: taskAttrs.is_done,
+      owner: taskAttrs.owner.id,
+      list: taskAttrs.listId,
+    };
+
+    return { task: response };
+  });
 }
 
 function getRequestParams(requestBody, keys) {
