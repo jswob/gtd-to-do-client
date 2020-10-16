@@ -507,6 +507,20 @@ export default function () {
 
     return { task: response };
   });
+
+  this.get("/tasks/:task_id", (schema, request) => {
+    const task = schema.tasks.find(request.params.task_id);
+
+    let response = {
+      id: task.id,
+      content: task.content,
+      is_done: task.is_done,
+      owner: task.ownerId,
+      list: task.listId,
+    };
+
+    return { task: response };
+  });
 }
 
 function getRequestParams(requestBody, keys) {
