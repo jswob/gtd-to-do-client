@@ -7,8 +7,8 @@ export default class PopUpFormComponent extends Component {
 
   @action
   async triggerAction(callback) {
-    await callback();
-    await this.toggleOpen();
+    const response = await callback();
+    if (response) await this.toggleOpen();
   }
 
   @action

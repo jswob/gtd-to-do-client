@@ -41,11 +41,12 @@ module("Integration | Component | pop-up-form", function (hooks) {
     assert.dom("[data-test-pop-up-form-wrapper]").doesNotExist();
   });
 
-  test("it properly fires action", async function (assert) {
-    assert.expect(2);
+  test("it properly fires callback action", async function (assert) {
+    assert.expect(3);
 
     this.set("action", function (value) {
       assert.ok(value, "It correctly fires action with passed argument");
+      return true;
     });
     this.set("value", true);
 
@@ -58,6 +59,15 @@ module("Integration | Component | pop-up-form", function (hooks) {
     await click("[data-test-pop-up-form-button]");
 
     assert.dom("[data-test-pop-up-form-wrapper]").doesNotExist();
+
+    this.set("action", function () {
+      return false;
+    });
+
+    await click("[data-test-pop-up-form-toggle]");
+    await click("[data-test-pop-up-form-button]");
+
+    assert.dom("[data-test-pop-up-form-wrapper]").exists();
   });
 
   test("it properly rollbacks changeset", async function (assert) {
