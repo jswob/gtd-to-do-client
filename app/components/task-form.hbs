@@ -1,0 +1,14 @@
+<PopUpForm ...attributes class="{{if @editMode "task-form-edit" "task-form-create"}}" @changeset={{@changeset}}
+    @changesetRollbackProperty="content"
+    @buttonClasses="{{if @editMode "task-form-edit-button" "task-form-create-button"}}"
+    @toggleText={{if @editMode "Edytuj" "Utwórz nowe zadanie"}} @buttonLabel={{if @editMode "Edytuj" "Utwórz"}}
+    @action={{fn this.manipulateTask @changeset}}>
+
+    <h3 data-test-task-form-title class="text-2xl font-bold">{{if @editMode "Edytuj" "Nowe zadanie"}}</h3>
+
+    <XForm::Input data-test-task-form-input
+        class="mt-4 w-5/6 px-4 py-2 text-xl font-semibold border-4 bg-green-200 text-black outline-none" @color="black"
+        @errorColor="red-600 " @errorLabelClasses="text-red-600 font-bold text-xl" @label="np. Kupić chleb"
+        @placeholderColor="gray-700" @property="content" @changeset={{@changeset}} />
+
+</PopUpForm>
