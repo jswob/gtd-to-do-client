@@ -481,12 +481,10 @@ export default function () {
   this.post("/tasks", async (schema, request) => {
     let requestBody = JSON.parse(request.requestBody).task;
 
-    console.log(requestBody);
-
     if (!requestBody.list) var userId = checkToken(request);
     else var userId = requestBody.owner;
 
-    var owner = schema.users.find(userId);
+    const owner = schema.users.find(userId);
 
     requestBody.owner = owner;
 
@@ -517,6 +515,36 @@ export default function () {
       is_done: task.is_done,
       owner: task.ownerId,
       list: task.listId,
+    };
+
+    return { task: response };
+  });
+
+  this.put("/tasks/:task_id", (schema, request) => {
+    let requestBody = JSON.parse(request.requestBody).task;
+
+    if (!requestBody.list) var userId = checkToken(request);
+    else var userId = requestBody.owner;
+
+    const owner = schema.users.find(userId);
+
+    const task = schema.tasks.find(request.params.task_id);
+
+    let listId = requestBody.list;
+
+    if (listId) requestBody.list = schema.lists.find(listId);
+    else requestBody.list = null;
+
+    requestBody.owner = owner;
+
+    const updatedTask = task.update(requestBody);
+
+    let response = {
+      id: updatedTask.id,
+      content: updatedTask.content,
+      is_done: updatedTask.is_done,
+      owner: updatedTask.owner.id,
+      list: updatedTask.listId,
     };
 
     return { task: response };
