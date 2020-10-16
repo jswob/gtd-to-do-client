@@ -15,7 +15,6 @@ module("Integration | Component | list-element", function (hooks) {
     ]);
     const action = (list) => {
       this.set("currentList", list);
-      console.log("x");
     };
 
     this.set("lists", lists);
