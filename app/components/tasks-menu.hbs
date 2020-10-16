@@ -1,0 +1,9 @@
+<section data-test-task-menu-wrapper ...attributes>
+    <article class="pb-20">
+        {{#each @list.tasks as |task|}}
+        <TaskElement data-test-task-menu-task={{task.id}} @task={{task}} @activeTasks={{@activeTasks}} />
+        {{/each}}
+    </article>
+
+    <TaskControlPanel data-test-task-menu-control-panel @currentList={{@list}} @activeTasks={{@activeTasks}} />
+</section>
