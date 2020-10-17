@@ -1,0 +1,18 @@
+<TopMenu @sideNav="true" @label={{@collection.title}}>
+    {{#if @collection.lists.length}}
+    <PopUpMenu data-test-navigation-icon @buttonText="more_vert" class="material-icons" @menuClasses="bg-green-500">
+        <h2 class="text-xl pt-1 pb-2 text-gray-900">{{@currentList.title}}</h2>
+        <PopUpMenu::Button data-test-navigation-new-list @route="user.collections.collection.lists.new"
+            @model={{@collection}}>Nowa lista
+        </PopUpMenu::Button>
+        <PopUpMenu::Button data-test-navigation-edit-list @route="user.collections.collection.list.edit"
+            @model={{@currentList}}>Edytuj listę
+        </PopUpMenu::Button>
+        <PopUpMenu::Button data-test-navigation-delete-list @route="user.collections.collection.list.delete"
+            @model={{@currentList}}>Usuń listę
+        </PopUpMenu::Button>
+    </PopUpMenu>
+    {{else}}
+    <LinkTo data-test-arrow-back @route="user.collections" class="material-icons text-center py-1">arrow_back</LinkTo>
+    {{/if}}
+</TopMenu>
