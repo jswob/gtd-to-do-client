@@ -1,0 +1,12 @@
+<div data-test-main-page-wrapper class="h-full" {{on "click" this.resetActiveTasks}}>
+    <MainPage::Navigation @currentList={{this.currentList}} @collection={{@model.collection}} />
+
+    <article class="text-center">
+        {{#if @model.lists.length}}
+        <ListsNavbar @lists={{@model.lists}} @currentList={{this.currentList}} @setListAction={{this.chooseList}} />
+        <TasksMenu @list={{this.currentList}} @activeTasks={{this.activeTasks}} />
+        {{else}}
+        <NoneListMenu />
+        {{/if}}
+    </article>
+</div>
