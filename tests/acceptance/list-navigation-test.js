@@ -35,7 +35,7 @@ module("Acceptance | list navigation", function (hooks) {
 
   test("it properly navigates to create list", async function (assert) {
     await visit(this.get("collectionLink"));
-    await click("[data-test-create-first-list-link]");
+    await click("[data-test-none-list-menu-link]");
 
     assert.equal(currentURL(), this.get("collectionLink") + "/lists/new");
 
@@ -44,14 +44,16 @@ module("Acceptance | list navigation", function (hooks) {
 
     assert.equal(currentURL(), this.get("collectionLink"));
 
-    await click("[data-test-pop-up-menu-icon]");
-    await click("[data-test-pop-up-menu-new-list]");
+    await click("[data-test-navigation-icon]");
+    await click("[data-test-navigation-new-list]");
 
     assert.equal(currentURL(), this.get("collectionLink") + "/lists/new");
 
     await click("[data-test-arrow-back]");
 
     assert.equal(currentURL(), this.get("collectionLink"));
+
+    await visit("/");
   });
 
   test("it properly navigates to edit list", async function (assert) {
@@ -62,8 +64,8 @@ module("Acceptance | list navigation", function (hooks) {
 
     await visit(this.get("collectionLink"));
 
-    await click("[data-test-pop-up-menu-icon]");
-    await click("[data-test-pop-up-menu-edit-list]");
+    await click("[data-test-navigation-icon]");
+    await click("[data-test-navigation-edit-list]");
 
     assert.equal(
       currentURL(),
@@ -73,6 +75,8 @@ module("Acceptance | list navigation", function (hooks) {
     await click("[data-test-arrow-back]");
 
     assert.equal(currentURL(), this.get("collectionLink"));
+
+    await visit("/");
   });
 
   test("it properly navigates to delete list", async function (assert) {
@@ -83,8 +87,8 @@ module("Acceptance | list navigation", function (hooks) {
 
     await visit(this.get("collectionLink"));
 
-    await click("[data-test-pop-up-menu-icon]");
-    await click("[data-test-pop-up-menu-delete-list]");
+    await click("[data-test-navigation-icon]");
+    await click("[data-test-navigation-delete-list]");
 
     assert.equal(
       currentURL(),
@@ -94,5 +98,7 @@ module("Acceptance | list navigation", function (hooks) {
     await click("[data-test-arrow-back]");
 
     assert.equal(currentURL(), this.get("collectionLink"));
+
+    await visit("/");
   });
 });
