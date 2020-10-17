@@ -1,0 +1,9 @@
+<nav ...attributes
+    class="sticky top-0 flex bg-gray-900 pt-2 hidden-scrollbar text-green-500 overflow-x-scroll h-full w-full">
+    {{#each @lists as |list|}}
+    <ListElement data-test-list-element data-test-list-element-id={{list.id}}
+        class="font-bold text-xl px-3 mx-3 pb-2 whitespace-no-wrap box-content border-green-500 focus:outline-none"
+        @list={{list}} @currentList={{@currentList}} @setListAction={{@setListAction}} @activeClasses="border-b-8"
+        @unactiveClasses="border-b-4" />
+    {{/each}}
+</nav>
