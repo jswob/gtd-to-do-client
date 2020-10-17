@@ -1,8 +1,10 @@
 <div class="flex border-b-2 border-green-700">
 
     <LinkTo data-test-user-menu-part="photo-link" @route="user.profile" class="w-1/5 p-2">
-        <img src="https://i.pinimg.com/474x/54/6f/5d/546f5d52913f2a896011f6c528976ae8.jpg"
+
+        <img src={{if this.currentData.user.avatarUrl this.currentData.user.avatarUrl "/assets/images/profile-img.jpg"}}
             class="rounded-full w-full h-full" alt="Profile avatar">
+
     </LinkTo>
 
     <div data-test-user-menu-part="username" class="my-auto ml-2 w-3/5 text-md">
