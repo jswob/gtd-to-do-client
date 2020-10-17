@@ -1,4 +1,4 @@
-<button ...attributes data-test-task-element-wrapper type="button"
+<button ...attributes data-test-task-element-wrapper data-test-task-element-id={{@list.id}} type="button"
     class="border-4 flex border-black mt-3 w-5/6 mx-auto text-lg font-semibold py-2 px-3 focus:outline-none {{this.currentClass}}"
     {{on "click" (stop-propagation this.activateTask)}}>
     <p data-test-task-element-content class="text-left w-full mr-3">

@@ -353,7 +353,6 @@ export default function () {
   });
 
   this.get("/lists/:list_id", (schema, request) => {
-    console.log("y");
     const list = schema.lists.find(request.params.list_id);
 
     const tasksLink = `/api/lists/${list.id}/tasks`;
@@ -381,13 +380,10 @@ export default function () {
     const response = tasks.map(({ attrs }) => {
       return {
         id: attrs.id,
-        title: attrs.title,
-        color: attrs.color,
+        content: attrs.content,
+        is_done: attrs.is_done,
         list: attrs.listId,
         owner: attrs.ownerId,
-        links: {
-          tasks: `/api/lists/${attrs.id}/tasks`,
-        },
       };
     });
 

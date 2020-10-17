@@ -15,7 +15,6 @@ module("Integration | Component | tasks-menu", function (hooks) {
     const collection = this.server.create("collection", { owner });
     const list = this.server.create("list", { owner, collection });
 
-    console.log(list.id);
     const listRecord = await store.findRecord("list", list.id);
 
     this.set("user", owner);
