@@ -8,7 +8,7 @@
 
 html,
 body {
-  @apply h-full bg-gray-700;
+  @apply h-full bg-gray-800;
 }
 
 .text-main {
@@ -132,4 +132,32 @@ body {
 
 .delete-tasks button {
   @apply bg-red-600 border-black text-black shadow-md font-bold mt-4;
+}
+
+.profile-main-details {
+  @apply pt-4 px-2;
+}
+
+.profile-main-details .avatar-img {
+  @apply rounded-full w-64 h-64 mx-auto;
+}
+
+.profile-main-details .email-label {
+  @apply text-3xl text-center text-green-500 font-bold mt-4;
+}
+
+.profile-main-operation-links {
+  @apply flex mx-auto my-16 w-64;
+}
+
+.profile-main-operation-links .link {
+  @apply w-5/12 text-center text-2xl font-bold py-3 rounded-lg;
+}
+
+.profile-main-operation-links .edit {
+  @apply bg-blue-400;
+}
+
+.profile-main-operation-links .delete {
+  @apply bg-red-400 ml-auto;
 }
