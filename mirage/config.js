@@ -469,9 +469,10 @@ export default function () {
   this.post("/tasks", async (schema, request) => {
     let requestBody = JSON.parse(request.requestBody).task;
 
-    if (!requestBody.list) var userId = checkToken(request);
+    if (!requestBody.owner) var userId = checkToken(request);
     else var userId = requestBody.owner;
 
+    console.log(userId);
     const owner = schema.users.find(userId);
 
     requestBody.owner = owner;
@@ -537,6 +538,8 @@ export default function () {
 
     return { task: response };
   });
+
+  this.delete("/tasks/:id");
 }
 
 function getRequestParams(requestBody, keys) {
