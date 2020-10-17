@@ -7,8 +7,8 @@ export default class UserCollectionsCollectionIndexRoute extends Route {
     const lists = await collection.lists;
 
     return hash({
-      collection: collection,
-      lists: lists,
+      collection,
+      lists,
     });
   }
 }
