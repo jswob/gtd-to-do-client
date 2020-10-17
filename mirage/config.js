@@ -65,7 +65,7 @@ export default function () {
       );
 
     return {
-      users: user,
+      user: user,
     };
   });
 
