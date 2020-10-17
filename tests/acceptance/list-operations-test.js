@@ -44,6 +44,8 @@ module("Acceptance | list operations", function (hooks) {
       .dom("[data-test-list-element]")
       .exists({ count: 1 })
       .includesText(listTitle);
+
+    await visit("/");
   });
 
   test("it should properly update list", async function (assert) {
@@ -64,6 +66,8 @@ module("Acceptance | list operations", function (hooks) {
       .dom("[data-test-list-element]")
       .exists({ count: 1 })
       .includesText(updatedListTitle);
+
+    await visit("/");
   });
 
   test("it should properly delete list", async function (assert) {
@@ -82,5 +86,7 @@ module("Acceptance | list operations", function (hooks) {
     assert.equal(currentURL(), this.get("collectionRouteLink"));
 
     assert.dom("[data-test-list-element]").doesNotExist();
+
+    await visit("/");
   });
 });
