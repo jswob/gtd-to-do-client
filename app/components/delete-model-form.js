@@ -7,8 +7,11 @@ export default class DeleteModelFormComponent extends Component {
 
   @action
   async deleteModel(model, transitionRoute) {
+    const { callback } = this.args;
     try {
       await model.destroyRecord();
+
+      if (callback) await callback();
       if (transitionRoute) this.router.transitionTo(transitionRoute);
     } catch (error) {
       throw error;
