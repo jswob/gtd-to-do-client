@@ -472,7 +472,6 @@ export default function () {
     if (!requestBody.owner) var userId = checkToken(request);
     else var userId = requestBody.owner;
 
-    console.log(userId);
     const owner = schema.users.find(userId);
 
     requestBody.owner = owner;
