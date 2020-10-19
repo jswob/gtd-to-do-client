@@ -31,4 +31,21 @@ module("Integration | Component | delete-model-form", function (hooks) {
 
     assert.ok(model.isDeleted);
   });
+
+  test("it fires callback action on delete", async function (assert) {
+    assert.expect(1);
+
+    const model = this.owner.lookup("service:store").createRecord("user", {});
+    this.set("model", model);
+    this.set("callback", function () {
+      assert.ok(true, "Callback action was fired");
+    });
+
+    await render(
+      hbs`
+        <DeleteModelForm @model={{this.model}} @callback={{this.callback}} />`
+    );
+
+    await click("[data-test-delete-model-form-button]");
+  });
 });
