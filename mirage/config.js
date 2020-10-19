@@ -51,6 +51,23 @@ export default function () {
     };
   });
 
+  this.put("/users/:user_id", (schema, request) => {
+    let requestBody = JSON.parse(request.requestBody).user;
+
+    const user = schema.users.find(request.params.user_id);
+
+    const updatedUser = user.update(requestBody);
+
+    let response = {
+      id: updatedUser.id,
+      email: updatedUser.content,
+    };
+
+    return { user: response };
+  });
+
+  this.delete("/users/:id");
+
   this.get("/users/:user_id", (schema, request) => {
     if (!checkToken(request))
       return new Response(401, {}, { errors: { detail: "Bad token" } });
