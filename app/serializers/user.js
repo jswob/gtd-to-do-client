@@ -18,11 +18,15 @@ export default class UserSerializer extends ApplicationSerializer {
   }
 
   serialize(snapshot, _options) {
-    let json = {
-      email: snapshot.attr("email"),
-      avatar_url: snapshot.attr("avatarUrl"),
-      password: snapshot.attr("password"),
-    };
+    const json = {};
+
+    const email = snapshot.attr("email");
+    const avatar_url = snapshot.attr("avatarUrl");
+    const password = snapshot.attr("password");
+
+    if (email) json.email = email;
+    if (avatar_url) json.avatar_url = avatar_url;
+    if (password) json.password = password;
 
     return json;
   }
