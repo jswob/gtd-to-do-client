@@ -1,0 +1,27 @@
+<XForm data-test-user-form class="pt-10 mx-4">
+    <XForm::Input data-test-user-form-input-email
+        class="my-2 w-5/6 px-4 py-2 text-xl font-semibold border-4 bg-gray-200 text-black outline-none" @color="black"
+        @errorColor="red-600 " @errorLabelClasses="text-red-600 font-bold text-xl" @label="Nowy email"
+        @placeholderColor="gray-700" @property="email" @changeset={{@changeset}} />
+
+    <XForm::Input data-test-user-form-input-password type="password"
+        class="my-2 w-5/6 px-4 py-2 text-xl font-semibold border-4 bg-gray-200 text-black outline-none" @color="black"
+        @errorColor="red-600 " @errorLabelClasses="text-red-600 font-bold text-xl" @label="Nowe hasło"
+        @placeholderColor="gray-700" @property="password" @changeset={{@changeset}} />
+
+    <XForm::Input data-test-user-form-input-repeatPassword type="password"
+        class="my-2 w-5/6 px-4 py-2 text-xl font-semibold border-4 bg-gray-200 text-black outline-none" @color="black"
+        @errorColor="red-600 " @errorLabelClasses="text-red-600 font-bold text-xl" @placeholderColor="gray-700"
+        @label="Powrórz hasło" @property="repeatPassword" @changeset={{@changeset}} />
+
+    <XForm::Input data-test-user-form-input-avatarUrl
+        class="my-2 w-5/6 px-4 py-2 text-xl font-semibold border-4 bg-gray-200 text-black outline-none" @color="black"
+        @errorColor="red-600 " @errorLabelClasses="text-red-600 font-bold text-xl" @label="Url do avatara"
+        @placeholderColor="gray-700" @property="avatarUrl" @changeset={{@changeset}} />
+
+    <div class="text-center">
+        <XForm::Button data-test-user-form-submit
+            class="w-5/6 mx-auto mt-6 py-4 text-2xl bg-gray-900 text-white font-semibold"
+            @action={{fn this.manipulateUser @changeset}}>Edytuj</XForm::Button>
+    </div>
+</XForm>
