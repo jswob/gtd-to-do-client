@@ -1,0 +1,9 @@
+<section data-test-delete-user-main>
+    <DeleteUserMain::Navigation data-test-delete-user-main-navigation />
+
+    <DeleteModelForm data-test-delete-user-main-delete-model-form @callback={{this.logoutUser}} @model={{@user}}>
+        Usunięcie profilu
+        "{{@user.email}}"
+        spowoduje jego nieodwracalną utratę! Stracone zostaną również wszystkie powiązane z nim pliki! Jeżeli
+        jesteś absolutnie pewien że chcesz kontynuować wcisnij przycisk "Usuń"</DeleteModelForm>
+</section>
