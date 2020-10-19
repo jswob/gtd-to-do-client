@@ -31,6 +31,7 @@ Router.map(function () {
       this.route("new");
     });
     this.route("profile");
+    this.route("edit");
     this.route("delete");
 
     this.route("buckets", function () {
