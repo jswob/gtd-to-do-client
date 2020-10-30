@@ -60,10 +60,10 @@ module.exports = function (environment) {
   }
 
   if (environment === "production") {
-    // ENV.api = {
-    //   host: "http://localhost:4000",
-    //   namespace: "api",
-    // };
+    ENV.api = {
+      host: "https://gtd-to-do-api.herokuapp.com",
+      namespace: "api",
+    };
 
     ENV["ember-cli-mirage"] = {
       enabled: true,
