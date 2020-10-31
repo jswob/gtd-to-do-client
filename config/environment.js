@@ -23,7 +23,7 @@ module.exports = function (environment) {
     },
 
     fastboot: {
-      hostWhitelist: [/^localhost:\d+$/],
+      hostWhitelist: [/^localhost:\d+$/, "gtd-to-do-client.herokuapp.com"],
     },
   };
 
