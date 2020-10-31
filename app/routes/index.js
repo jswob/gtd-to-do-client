@@ -1,7 +1,7 @@
 import Route from "@ember/routing/route";
 
 export default class IndexRoute extends Route {
-  // beforeModel() {
-  //   this.transitionTo("sign-in");
-  // }
+  beforeModel() {
+    this.transitionTo("sign-in");
+  }
 }
