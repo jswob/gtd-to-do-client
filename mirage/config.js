@@ -574,7 +574,7 @@ function getRequestParams(requestBody, keys) {
 }
 
 function checkToken(request) {
-  const token = request.requestHeaders.authorization.split(" ")[1];
+  const token = request.requestHeaders.Authorization.split(" ")[1];
 
   if (!token || !token.includes("access_token_")) return false;
 

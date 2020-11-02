@@ -36,7 +36,9 @@ export default class XFormInputComponent extends Component {
       }
     });
 
-    if (error) return error.validation[0];
-    return null;
+    if (error && Array.isArray(error.validation)) {
+      return error.validation[0];
+    } else if (error) return error.validation;
+    else return null;
   }
 }

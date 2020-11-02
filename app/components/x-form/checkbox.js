@@ -9,14 +9,9 @@ export default class XFormCheckboxComponent extends Component {
     const { value, changeset, property } = this.args;
     const changesetList = changeset[property];
 
-    changesetList
-      .then((array) => {
-        if (array.includes(value)) return (this.isActive = true);
-        return (this.isActive = false);
-      })
-      .catch((error) => {
-        throw error;
-      });
+    if (changesetList.then) {
+      changesetList.then((list) => (this.isActive = list.includes(value)));
+    } else this.isActive = changesetList.includes(value);
   }
 
   @tracked isActive;
